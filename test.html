@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Cart Example</title>
+    <style>
+        /* Add some basic CSS for styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+        }
+        #cart {
+            border: 1px solid #333;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Cart Example</h1>
+    
+    <!-- Items -->
+    <div class="item">
+        <h2>Item 1</h2>
+        <p>Price: $10</p>
+        <button onclick="addToCart('Item 1', 10)">Add to Cart</button>
+    </div>
+
+    <div class="item">
+        <h2>Item 2</h2>
+        <p>Price: $15</p>
+        <button onclick="addToCart('Item 2', 15)">Add to Cart</button>
+    </div>
+
+    <!-- Cart -->
+    <div id="cart">
+        <h2>Cart</h2>
+        <ul id="cart-items">
+            <!-- Cart items will be added here dynamically -->
+        </ul>
+        <p>Total: $<span id="cart-total">0</span></p>
+    </div>
+
+    <script>
+        // JavaScript code to handle cart functionality
+        const cartItems = [];
+        let total = 0;
+
+        function addToCart(itemName, itemPrice) {
+            cartItems.push({ name: itemName, price: itemPrice });
+            total += itemPrice;
+
+            // Update the cart display
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
+            const cartList = document.getElementById("cart-items");
+            const cartTotal = document.getElementById("cart-total");
+
+            // Clear existing cart items
+            cartList.innerHTML = "";
+
+            // Add updated cart items
+            cartItems.forEach(item => {
+                const listItem = document.createElement("li");
+                listItem.textContent = `${item.name} - $${item.price}`;
+                cartList.appendChild(listItem);
+            });
+
+            // Update the total
+            cartTotal.textContent = total;
+        }
+    </script>
+</body>
+</html>
+
+

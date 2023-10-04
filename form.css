@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Courier New', Courier, monospace;
+}
+body{
+    position: relative;
+    background: url(4492606.jpg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+::selection{
+    color: aliceblue;
+    background: orange;
+}
+
+.form{
+    position: relative;
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: -3px 3px 10px -5px rgba(0,0,0,0.2);
+    padding: 30px 30px;
+}

@@ -1,0 +1,139 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+    
+    body{
+        /* display: flex; */
+         height: 100vh;
+        justify-content: center;
+        align-items: center;
+        /* padding: 10px; */
+        background: url(4492606.jpg);
+    }  */
+    .wrapper {
+               /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    width: 420px;
+    background: white;
+    color: black;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 10% 34%;
+    text-align: center; /*Center content horizontally */
+            }
+    
+    .wrapper h1 {
+                font-size: 36px;
+            }
+    .containerz{
+        justify-content: center;
+                align-items: center;
+                width: 420px;
+                background: white;
+                color: black;
+                border-radius: 10px;
+                padding: 30px;
+                margin: 3% 34%;
+                text-align: center;
+    }
+    
+    .containerz .title{
+        font-size: 25px;
+        font-weight: 500;
+        position:relative;
+    }
+    .containerz .title::before{
+        content: '';
+        position: absolute;
+        height: 3px;
+        width: 30px;
+        left: 0;
+        bottom: 0;
+        background: #9b59b6;
+    }
+    
+    .containerz form .user-details{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin:20px 0 12px 0;
+    }
+    
+    form .user-details .input-box{
+        width:calc(100%/2 - 20px);
+        margin-bottom: 15px;
+    }
+    
+    .user-details .input-box .details{
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+    .user-details .input-box input{
+        height: 45px;
+        width: 100%;
+        outline: none;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding-left: 15px;
+        font-size: 16px;
+    }
+    .user-details .input-box input:focus,.user-details .input-box input:focus{
+     border-color: #9b59b6;    
+    }
+    
+    
+    form .button input{
+        height: 100%;
+        width: 100%;
+        outline: none;
+        color: #fff;
+        border: none;
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        background: orange;
+    }
+    
+    form .button input:hover{
+        background-color: orangered;
+    }
+    
+    @media(max-width: 583px){
+        .container{
+            max-width: 100%;
+        }
+    
+    }
+    
+    form .user-details .input-box{
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    
+    .container form .user-details{
+        max-height: 300px;
+        overflow-y: scroll;
+    }
+    .user-details::-webkit-scrollbar{
+        width: 0;
+    }
+    
+    .btn{
+        background-color: orange;
+        color: white;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 200px;
+        padding: 15px 0;
+        text-align: center;
+        margin: 20px 15px;
+        font-weight: bold;
+        cursor: pointer;
+       
+    }
