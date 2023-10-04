@@ -128,7 +128,7 @@ $select_query = mysqli_query($connection,"SELECT * FROM restaurant");
     <?php
 
 
-session_start();
+// session_start();
 // if(empty($_SESSION['restaurant_name']))
 // {
 // 	header('location:book.php');
