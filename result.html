@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selected Option</title>
+</head>
+<body>
+    <h1>Selected Option:</h1>
+    <p id="selectedOption"></p>
+    <script>
+        // Extract the option value from the query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedOption = urlParams.get('option');
+        
+        // Display the selected option on the page
+        const selectedOptionElement = document.getElementById('selectedOption');
+        selectedOptionElement.textContent = selectedOption || 'No option selected';
+    </script>
+</body>
+</html>

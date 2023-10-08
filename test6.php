@@ -114,29 +114,20 @@ $select_db = mysqli_select_db($connection, $database);
                 </div>
             </div>
         </nav>
-    </header>
-    <?php
+</header>
+    
+    
+<?php
 
-require_once 'connection.php';
-
-// $sql = "SELECT * FROM restaurant";
-// $all_product = $select_db->query($sql);
-$select_query = mysqli_query($connection,"SELECT * FROM restaurant");
-
-// session_start();
+require_once 'connect_rest.php';
 $restaurantName = $_GET['restaurantName'];
 
-?>
-    <?php
+$select_query = mysqli_query($connection,"SELECT * FROM `$restaurantName`");
 
 
-// session_start();
-// if(empty($_SESSION['restaurant_name']))
-// {
-// 	header('location:book.php');
-// }
 
 ?>
+   
     <div class="restaurant">
     <h2><?php echo $restaurantName; ?></h2>
      <p>Restaurant Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, odio ac vehicula mattis, dolor tortor varius lectus, vel fermentum odio mi in dui.</p>
@@ -145,28 +136,19 @@ $restaurantName = $_GET['restaurantName'];
 
         <h2>Menu</h2>
 
-        <?php
-
-require_once 'connection.php';
-
-// $sql = "SELECT * FROM restaurant";
-// $all_product = $select_db->query($sql);
-$select_query = mysqli_query($connection,"SELECT * FROM menu");
-
-
-?>
+        
         <?php
         while($row = mysqli_fetch_assoc($select_query)){
 
     ?>
         <div class="menu-item">
-        <!-- <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" /> -->
+        
             <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" alt="Item 1 Image" class="item-image"/>
             <div>
-                <h3><?php echo $row["food_name"]; ?></h3>
+                <h3><?php echo $row["food_item"]; ?></h3>
                 
-                <p><?php echo $row["food_price"]; ?></p>
-                <button class="order-button" data-name="<?php echo $row["food_name"]; ?>" data-price="<?php echo $row["food_price"]; ?>">Order</button>
+                <p><?php echo $row["price"]; ?></p>
+                <button class="order-button" data-name="<?php echo $row["food_item"]; ?>" data-price="<?php echo $row["price"]; ?>">Order</button>
             </div>
         </div>
 

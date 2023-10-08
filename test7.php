@@ -105,7 +105,7 @@ $select_query = mysqli_query($connection,"SELECT * FROM restaurant");
             <button type="button" onclick="displaySelectedOption(`<?php echo $restaurantName; ?>`)">Book</button>
     <script>
         function displaySelectedOption(restaurantName) {
-            window.location.href = `restaurant.php?restaurantName=${restaurantName}`;
+            window.location.href = `test6.php?restaurantName=${restaurantName}`;
         }
     </script>
 </div>
