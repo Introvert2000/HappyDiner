@@ -102,7 +102,9 @@
                   
          </div>
          
-         <a class="btn btn-primary" href="delivery.php" role="button">Order Food</a>
+         <!-- <a class="btn btn-primary" href="delivery.php" id="get-location" role="button">Order Food</a> -->
+         <button id= "get-location-order">Order</button>
+
      </div>
      <div class="card">
          <div class="image">
@@ -112,10 +114,51 @@
                   
          </div>
          
-         <a class="btn btn-primary" href="book.php" role="button">Book</a>
+         <!-- <a class="btn btn-primary" href="book.php" id="get-location" role="button">Book</a> -->
+         <button id= "get-location-book">Book</button>
      </div>
      
 </main>
+<script>
+  
+    document.getElementById("get-location-order").onclick = function() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(gotLocation_order, failed);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    };
+
+   
+
+    function gotLocation_order(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        // Pass latitude and longitude to the Geoapify API
+        fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&apiKey=6280fa3f1f5e4b7ca8931c01979b1e88`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.features && data.features.length > 0) {
+                    const county = data.features[0].properties.county;
+                    
+                    // Redirect to the next PHP page with the city as a query parameter
+                    window.location.href = `delivery.php?city=${county}`;
+                } else {
+                    alert("City not found");
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching data from the API:", error);
+                alert("Error fetching data from the API");
+            });
+    }
+
+    function failed() {
+        alert("Error getting location");
+    }
+
+</script>
 
 </body>
 </html>

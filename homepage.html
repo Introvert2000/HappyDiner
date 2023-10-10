@@ -3,27 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Responsive Navbar</title>
+    <title>Sign Up Modal</title>
+    <link rel="stylesheet" href="styles.css"> <!-- You should create a separate CSS file for styling -->
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 5px;
+        }
+
+        /* Close button style */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="container">
-                <div class="logo">
-                    <a href="#">Happy Diner</a>
-                </div>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search...">
-                </div>
-                <div class="menu">
-                    <ul>
-                        <li><a href="index.php">Login</a></li>
-                        <li><a href="register.php">Register</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <button id="openModal">Open Sign Up Modal</button>
+
+    <!-- The Modal -->
+    <div id="signUpModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>Sign Up</h2>
+            <form action="process_signup.php" method="post">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required><br><br>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br><br>
+
+                <input type="submit" value="Sign Up">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to show and hide the modal
+        const openModalButton = document.getElementById("openModal");
+        const closeModalButton = document.getElementById("closeModal");
+        const modal = document.getElementById("signUpModal");
+
+        openModalButton.addEventListener("click", () => {
+            modal.style.display = "block";
+        });
+
+        closeModalButton.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        // Close the modal when the user clicks anywhere outside the modal
+        window.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+    </script>
 </body>
 </html>

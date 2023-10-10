@@ -6,14 +6,31 @@
     <title>Register</title>
    <link rel="stylesheet" href="style2.css"> 
    <link rel="stylesheet" href="styles.css">
+    <style>
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            opacity: 0.7; /* Adjust the opacity to make the content partially visible */
+        }
 
+        /* Style for the link */
+        footer a {
+            color: #fff;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav>
             <div class="container">
                 <div class="logo">
-                    <a href="home.php">Happy Diner</a>
+                    <a href="index.php">Happy Diner</a>
                 </div>
                 <div class="search-bar">
                     <input type="text" placeholder="Search...">
@@ -74,7 +91,9 @@
           
       </form>
     </div>
-
+<footer>
+   Want to be a Restaurant Partner ?    <a href="register_restaurant.php">Register</a>.
+</footer>
 
 </body>
 </html>
