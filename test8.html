@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Location and City</title>
+</head>
+<body>
+    <button id="get-location">Get Location</button>
+    <p id="location-info">Click the button to get your location and city.</p>
+</body>
+<script>
+    const button = document.getElementById("get-location");
+    const locationInfo = document.getElementById("location-info");
+
+    function gotLocation(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        
+        // Display the latitude and longitude
+        locationInfo.textContent = `${latitude} & ${longitude}`;
+        
+        // Pass latitude and longitude to the Geoapify API
+        fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&apiKey=6280fa3f1f5e4b7ca8931c01979b1e88`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.features && data.features.length > 0) {
+                    const city = data.features[0].properties.city;
+                    locationInfo.textContent += ` City: ${city}`;
+                } else {
+                    locationInfo.textContent += `, City not found`;
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching data from the API:", error);
+            });
+    }
+
+    function failed() {
+        locationInfo.textContent = "Error getting location";
+    }
+
+    button.addEventListener("click", async () => {
+        navigator.geolocation.getCurrentPosition(gotLocation, failed);
+    });
+</script>
+</html>

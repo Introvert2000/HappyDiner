@@ -1,11 +1,15 @@
 <?php
 
 require_once 'connection.php';
+$city = $_GET['city'];
 
-// $sql = "SELECT * FROM restaurant";
-// $all_product = $select_db->query($sql);
-$select_query = mysqli_query($connection,"SELECT * FROM restaurant");
-
+if(empty($_SESSION['city'])){
+    $select_query = mysqli_query($connection,"SELECT * FROM restaurant WHERE city = '{$city}' ");
+    
+}
+else{
+    $select_query = mysqli_query($connection,"SELECT * FROM restaurant ");
+}
 
 ?>
 
@@ -49,7 +53,7 @@ $select_query = mysqli_query($connection,"SELECT * FROM restaurant");
         <nav>
             <div class="container">
                 <div class="logo">
-                    <a href="#">Happy Diner</a>
+                    <a href="index.php">Happy Diner</a>
                 </div>
                 <div class="search-bar">
                     <input type="text" placeholder="Search...">
@@ -79,13 +83,13 @@ $select_query = mysqli_query($connection,"SELECT * FROM restaurant");
                 </div>
             </div>
         </nav>
-    </header>
+</header>
 <main>
      <?php
         while($row = mysqli_fetch_assoc($select_query)){
 
     ?>
-     <div class="card">
+<div class="card">
          <div class="image">
              
              <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" />
@@ -93,25 +97,21 @@ $select_query = mysqli_query($connection,"SELECT * FROM restaurant");
         
             </div>
          <div class="caption">
-        <form method="POST" action="test6.php" >
             <?php 
             $restaurantName=$row['restaurant_name'];
             $_SESSION['restaurant']=$restaurantName;
             ?>
         <p class="product_name"><?php echo $restaurantName; ?></p>
-            <!-- <p class="product_name". ><?php echo $row["restaurant_name"]; ?></p>  -->
             
-            <!-- <input type="submit" id="Submit" name="Submit" value="Book" class="btn btn-success" /> -->
             <button type="button" onclick="displaySelectedOption(`<?php echo $restaurantName; ?>`)">Book</button>
     <script>
         function displaySelectedOption(restaurantName) {
-            window.location.href = `restaurant.php?restaurantName=${restaurantName}`;
+            window.location.href = `book_table.php?restaurantName=${restaurantName}`;
         }
     </script>
 </div>
          
 
-         </form>
 
      </div>
      <?php

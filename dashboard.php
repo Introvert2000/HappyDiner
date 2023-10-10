@@ -15,7 +15,7 @@
             padding: 0;
         }
 		
-        .container {
+        .containerz {
 			max-width: 800px;
             margin: 0 auto;
             padding: 20px;
@@ -52,7 +52,7 @@
         <nav>
             <div class="container">
                 <div class="logo">
-                    <a href="home.php">Happy Diner</a>
+                    <a href="index.php">Happy Diner</a>
                 </div>
                 <div class="search-bar">
                     <input type="text" placeholder="Search...">
@@ -86,7 +86,7 @@
             </div>
         </nav>
 </header>
-    <div class="container">
+    <div class="containerz">
         <h1>Dashboard</h1>
 
         <div class="account-info">
