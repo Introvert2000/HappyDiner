@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -120,7 +117,12 @@
      
 </main>
 <script>
-  
+    document.getElementById("get-location-book").onclick = function(){
+    
+    window.location.href = `book.php`
+    } 
+
+
     document.getElementById("get-location-order").onclick = function() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(gotLocation_order, failed);
