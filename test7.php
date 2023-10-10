@@ -1,15 +1,11 @@
 <?php
 
 require_once 'connection.php';
-$city = $_GET['city'];
 
-if(empty($_SESSION['city'])){
-    $select_query = mysqli_query($connection,"SELECT * FROM restaurant WHERE city = '{$city}' ");
-    
-}
-else{
-    $select_query = mysqli_query($connection,"SELECT * FROM restaurant ");
-}
+// $sql = "SELECT * FROM restaurant";
+// $all_product = $select_db->query($sql);
+$select_query = mysqli_query($connection,"SELECT * FROM restaurant");
+
 
 ?>
 

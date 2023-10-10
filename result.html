@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Dashboard</title>
+    <link rel="stylesheet" href="styles.css"> <!-- You can link a CSS file for styling -->
+</head>
+<body>
+    <header>
+        <h1>Restaurant Dashboard</h1>
+    </header>
+    
+    <section id="menu">
+        <h2>Menu</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Display menu items from the database here -->
+                <!-- Each row should have buttons for updating and deleting -->
+                <tr>
+                    <td>Item 1</td>
+                    <td>Description 1</td>
+                    <td>$10.00</td>
+                    <td>
+                        <button class="update-button">Update</button>
+                        <button class="delete-button">Delete</button>
+                    </td>
+                </tr>
+                <!-- Repeat similar rows for other menu items -->
+            </tbody>
+        </table>
+    </section>
+
+    <section id="add-menu-item">
+        <h2>Add Menu Item</h2>
+        <form action="/add-menu-item" method="POST"> <!-- Specify the correct action and method for your backend -->
+            <label for="item-name">Item Name:</label>
+            <input type="text" id="item-name" name="item-name" required>
+            <br>
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" required>
+            <br>
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" step="0.01" required>
+            <br>
+            <button type="submit">Add Item</button>
+        </form>
+    </section>
+
+    <footer>
+        <!-- Add footer content if needed -->
+    </footer>
+</body>
+</html>

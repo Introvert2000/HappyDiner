@@ -129,6 +129,22 @@ session_start();
         .showpassword{
 
         }
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            opacity: 0.7; /* Adjust the opacity to make the content partially visible */
+        }
+
+        /* Style for the link */
+        footer a {
+            color: #fff;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <header>
@@ -194,5 +210,8 @@ function myFunction() {
  </div>
  </form>
 </div> 
+<footer>
+    Restaurant Partner ?    <a href="login_restaurant.php">Click here</a>.
+</footer>
 </body>
 </html>
