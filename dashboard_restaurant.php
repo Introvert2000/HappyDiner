@@ -55,79 +55,70 @@
                 <div class="menu">
                    <?php
                    session_start();
-                   if(empty($_SESSION['Name1']))
-                   {
-                   
-                   ?>
-                    <ul>
-                        <li><a href="login.php">Login</a></li>
-                        <li><a href="register.php">Register</a></li>
-                    </ul>
-                    <?php }
-                    else{
-                        ?>
+                    ?>
 
                         <ul>
-                        <li id="username"> <a><?php if(!empty($_SESSION['Name1'])){ echo $_SESSION['Name1']; }?></a> </li>
+                        <li id="restaurant_name"> <a><?php if(!empty($_SESSION['restaurant1'])){ echo $_SESSION['restaurant1']; }?></a> </li>
                         </ul>
                         
-                        <?php
-                    }
-                    ?>
+                        
                 </div>
             </div>
         </nav>
 </header>
     
-    <main>
+    <!-- <main>
         <button id="toggleSidebar">☰ Menu</button>
         <section id="dashboard">
             <h2 id="basic">Basic Restaurant Statistics</h2>
-            <!-- Add your basic statistics here -->
+            Add your basic statistics here 
         </section>
 
         <section id="menu-content">
-            <!-- Content for orders and bookings pages will load here -->
+             Content for orders and bookings pages will load here 
         </section>
-    </main>
+    </main> -->
+    <h1>Restaurant Owner Dashboard</h1>
 
-    <div id="sidebar">
-        <a href="#" id="closeSidebar">Close</a>
-        <a href="order_dashboard.php">Orders</a>
-        <a href="table_dashboard.php">Bookings</a>
-    </div>
+<!-- Form to add a new menu item -->
+<form action="add_item.php" method="post">
+    <label for="item_name">Item Name:</label>
+    <input type="text" name="item_name" required>
+   
+    <label for="item_price">Item Price:</label>
+    <input type="text" name="item_price" required>
 
-    <div class="dashboard">
-        <h2>Current Orders</h2>
-        <div class="order">
-            <span>Order #1:</span>
-            <span>Status: <strong>Pending</strong></span>
-            <span class="timer">00:10</span> <!-- Timer display -->
-        </div>
-        <div class="order">
-            <span>Order #2:</span>
-            <span>Status: <strong>Completed</strong></span>
-        </div>
-    </div>
+    <button type="submit">Add Item</button>
+</form>
 
-    <div class="dashboard">
-        <h2>Tables Booked</h2>
-        <span>Number of Tables Booked: <strong>5</strong></span>
-    </div>
+<h2>Menu Items</h2>
+<table>
+    <tr>
+        <th>Item Name</th>
+        <th>Item Price</th>
+        
+    </tr>
+    <?php
+    // Use PHP to fetch and display existing menu items from the database
+    include 'connect_rest.php';
+    $restaurant = $_SESSION['restaurant1'];                
+    $sql = "SELECT * FROM `$restaurant`";
+    $result = mysqli_query($connection, $sql);
 
-    <script>
-        // JavaScript for side drawer animation
-        const toggleSidebarButton = document.getElementById("toggleSidebar");
-        const closeSidebarButton = document.getElementById("closeSidebar");
-        const sidebar = document.getElementById("sidebar");
-
-        toggleSidebarButton.addEventListener("click", () => {
-            sidebar.style.width = "250px";
-        });
-
-        closeSidebarButton.addEventListener("click", () => {
-            sidebar.style.width = "0";
-        });
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo "<tr>";
+        echo "<td>" . $row['food_item'] . "</td>";
+        echo "<td>" . $row['price'] . "</td>";
+        echo "<td><a href='delete.php?id=" . $row['id'] . "'>Delete</a></td>";
+        echo "</tr>";
+    }
+    ?>
+</table>
+    <script src="drawer.js">
+        
     </script>
+<form action="logout_rest.php" method="post">
+    <button type="submit">Logout</button>
+</form>
 </body>
 </html>

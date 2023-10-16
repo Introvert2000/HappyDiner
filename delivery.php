@@ -109,7 +109,7 @@ else{
             <button type="button" onclick="displaySelectedOption(`<?php echo $restaurantName; ?>`)">Book</button>
     <script>
         function displaySelectedOption(restaurantName) {
-            window.location.href = `test6.php?restaurantName=${restaurantName}`;
+            window.location.href = `delivery_product.php?restaurantName=${restaurantName}`;
         }
     </script>
 </div>

@@ -81,7 +81,7 @@ $select_db = mysqli_select_db($connection, $database);
         <nav>
             <div class="container">
                 <div class="logo">
-                    <a href="index.php">Happy Diner</a>
+                    <a href="home.php">Happy Diner</a>
                 </div>
                 <div class="search-bar">
                     <input type="text" placeholder="Search...">
