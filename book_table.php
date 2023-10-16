@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Table Booking</title>
+    <link rel="stylesheet" href="book_table.css">
     <link rel="stylesheet" href="styles.css"> <!-- You can link to your CSS file here -->
 </head>
 <body>
