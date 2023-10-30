@@ -151,7 +151,7 @@ session_start();
     <nav>
         <div class="container">
             <div class="logo">
-                <a href="#">Happy Diner</a>
+                <a href="index.php">Happy Diner</a>
             </div>
             <div class="search-bar">
                 <input type="text" placeholder="Search...">

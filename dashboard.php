@@ -123,6 +123,10 @@
             </div>
             <!-- Add more order items here -->
         </div>
+
+        <form action="logout.php" method="post">
+        <button type="submit">Logout</button>
+        </form>
     </div>
 </body>
 </html>
