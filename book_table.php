@@ -6,9 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Table Booking</title>
     <link rel="stylesheet" href="book_table.css">
-    <link rel="stylesheet" href="styles.css"> <!-- You can link to your CSS file here -->
+    <link rel="stylesheet" href="styles.css"> 
 </head>
-
+<style>
+    body {
+    background-color: #243447; /* Black background color */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+  }
+</style>
 <body>
     <header>
         <nav>
