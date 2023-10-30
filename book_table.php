@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Table Booking</title>
     <link rel="stylesheet" href="book_table.css">
+
     <link rel="stylesheet" href="styles.css"> 
+
+
 </head>
 <style>
     body {
@@ -20,11 +23,11 @@
         <nav>
             <div class="container">
                 <div class="logo">
-                    <a href="#">Happy Diner</a>
+                    <a href="./index.php">Happy Diner</a>
                 </div>
-                <div class="search-bar">
+                <!-- <div class="search-bar">
                     <input type="text" placeholder="Search...">
-                </div>
+                </div> -->
                 <div class="menu">
                     <?php
                     session_start();
@@ -56,6 +59,7 @@
 
     <main>
         <div class="center-form">
+
             <div>
 
                 <?php
