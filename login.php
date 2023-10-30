@@ -1,217 +1,166 @@
-<?php
-session_start();
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Product</title>
+    <link rel="stylesheet" href="font.css">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Poppins", sans-serif;
-        }
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+<style>
+    .custom-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Add rounded corners */
+  cursor: pointer; /* Change cursor on hover to indicate interactivity */
+  text-align: center; /* Center text horizontally */
+  text-decoration: none; /* Remove underlines for <a> elements */
+}
 
-        body {
-            /* display: flex; 
-            justify-content: center;
-            align-items: center; */
-            min-height: 100vh;
-            background: url(4492606.jpg) no-repeat;
-            background-size: cover; /* Added to cover the entire viewport */
-        }
+.custom-button:hover {
+  background-color: #0056b3; /* Change background color on hover */
+}
 
-        .wrapper {
-            /* display: flex; */
-            justify-content: center;
-            align-items: center;
-            width: 420px;
-            background: white;
-            color: black;
-            border-radius: 10px;
-            padding: 30px;
-            margin: 10% 34%;
-            text-align: center; /*Center content horizontally */
-        }
+.custom-button:active {
+  background-color: #00479e; /* Change background color when clicked */
+}
+/* Basic button styles */
+.btn {
+  display: inline-block;
+  padding: 10px 20px; /* Adjust padding as needed */
+  background-color: #007bff; /* Change the background color to your desired color */
+  color: #fff; /* Text color */
+  text-decoration: none; /* Remove underline */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer;
+  font-weight: bold;
+}
 
-        .wrapper h1 {
-            font-size: 36px;
-        }
+/* Hover effect */
+.btn:hover {
+  background-color: #0056b3; /* Change the background color on hover */
+}
+.username{
 
-        .input-box {
-            width: 100%;
-            margin: 20px 0;
-            position: relative;
-        }
-
-        .input-box input {
-            width: 100%;
-            height: 45px;
-            background: transparent;
-            border: none;
-            outline: none;
-            border: 1px solid #ccc;
-            border-radius: 40px;
-            font-size: 16px;
-            color: black;
-            padding: 15px; /* Adjusted padding */
-        }
-
-        .input-box i {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-        }
-
-        .remember-forgot {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14.5px;
-            margin: 15px 0; /* Adjusted margin */
-            align-items: center; /* Center vertically */
-        }
-
-        .remember-forgot label input {
-            accent-color: black;
-            margin-right: 3px;
-            border: 1px solid #ccc;
-        }
-
-        .remember-forgot a {
-            color: black;
-            text-decoration: none;
-        }
-
-        .remember-forgot a:hover {
-            text-decoration: underline;
-        }
-
-        .btn {
-            width: 100%;
-            height: 45px;
-            background-color: orange;
-            border: none;
-            outline: none;
-            border-radius: 40px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            font-size: 16px;
-            color: #333;
-            font-weight: 600;
-            margin-top: 15px; /* Adjusted margin */
-        }
-
-        .Register-Link {
-            font-size: 14.5px;
-            text-align: center;
-            margin-top: 20px; /* Adjusted margin */
-        }
-
-        .Register-Link p a {
-            color: black;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .Register-Link p a:hover {
-            text-decoration: underline;
-        }
-
-        .showpassword{
-
-        }
-        footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            opacity: 0.7; /* Adjust the opacity to make the content partially visible */
-        }
-
-        /* Style for the link */
-        footer a {
-            color: #fff;
-            text-decoration: underline;
-        }
-    </style>
+}
+</style>
 </head>
-<header>
-    <nav>
-        <div class="container">
-            <div class="logo">
-                <a href="#">Happy Diner</a>
-            </div>
-            <div class="search-bar">
-                <input type="text" placeholder="Search...">
-            </div>
-            <div class="menu">
-                <ul>
-                    <li><a href="login.php">Login</a></li>
-                    <li><a href="register.php">Register</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
 
 
 <body>
-<div class="wrapper">
-    <form action="login2.php" method="post">
-        <h1>Login</h1>
-        <div class="input-box">
-            <input type="text" placeholder="Username" required name="Username">
-            <i class="bx bxs-user"></i>
-        </div>
-        <div class="input-box">
-            <input type="password" placeholder="Password" required name="Password1" id="myInput">
-            <i class="bx bxs-lock-alt"></i>
-        </div>
-       <div class="remember-forgot">
-        <label >
-       <input type="checkbox" onclick="myFunction()">Show Password
-       </label>
-       </div>
+<header>
+        <nav>
+            <div class="container">
+                <div class="logo">
+                    <a href="#">Happy Diner</a>
+                </div>
+                <div class="search-bar">
+                    <form method="post" action="display.php"><input type="text" placeholder="Search..." name= "search">
+                </div>
+                <input type="submit" name="submit">
+            </form>
+                <div class="menu">
+                   <?php
+                   session_start();
+                   if(empty($_SESSION['Name1']))
+                   {
+                   
+                   ?>
+                    <ul>
+                        <li><a href="login.php">Login</a></li>
+                        <li><a href="register.php">Register</a></li>
+                    </ul>
+                    <?php }
+                    else{
+                        ?>
 
+                        <ul>
+                        <li id="username"> <a><?php if(!empty($_SESSION['Name1'])){ echo $_SESSION['Name1']; }?></a> </li>
+                        </ul>
+                        
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
+        </nav>
+    </header>
+<main>
+    
+     <div class="card">
+         <div class="image">
+             <img src="Picture/Order_Food.avif" />
+         </div>
+         <div class="caption">
+                  
+         </div>
+         
+         <!-- <a class="btn btn-primary" href="delivery.php" id="get-location" role="button">Order Food</a> -->
+         <button id= "get-location-order">Order</button>
+
+     </div>
+     <div class="card">
+         <div class="image">
+             <img src="Picture/Dining.avif" />
+         </div>
+         <div class="caption">
+                  
+         </div>
+         
+         <!-- <a class="btn btn-primary" href="book.php" id="get-location" role="button">Book</a> -->
+         <button id= "get-location-book">Book</button>
+     </div>
+     
+</main>
 <script>
-function myFunction() {
-  var x = document.getElementById("myInput");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
-  }
-}
-</script>
- <div class="remember-forgot">
- <label>
- <input type="checkbox">
-  Remember me
- </label>
- <a href="forget.php">Forgot password?</a>
- </div>
- 
- <button type="Submit" class="btn">Login</button>
+    document.getElementById("get-location-book").onclick = function(){
+    
+    window.location.href = `book.php`
+    } 
 
- <div class="Register-Link">
- <p>Don't have an account? <a href="register.php">Register</a></p>
- </div>
- </form>
-</div> 
-<footer>
-    Restaurant Partner ?    <a href="login_restaurant.php">Click here</a>.
-</footer>
+
+    document.getElementById("get-location-order").onclick = function() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(gotLocation_order, failed);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    };
+
+   
+
+    function gotLocation_order(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        // Pass latitude and longitude to the Geoapify API
+        fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&apiKey=6280fa3f1f5e4b7ca8931c01979b1e88`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.features && data.features.length > 0) {
+                    const county = data.features[0].properties.county;
+                    
+                    // Redirect to the next PHP page with the city as a query parameter
+                    window.location.href = `delivery.php?city=${county}`;
+                } else {
+                    alert("City not found");
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching data from the API:", error);
+                alert("Error fetching data from the API");
+            });
+    }
+
+    function failed() {
+        alert("Error getting location");
+    }
+
+</script>
+
 </body>
 </html>

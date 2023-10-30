@@ -1,0 +1,35 @@
+body {
+    background-color: #243447; /* Black background color */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+  }
+
+.center-form {
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    height: 50vh;
+    width: 50vh;
+    /* This centers the form vertically in the middle of the viewport */
+}
+
+#booking-form {
+    max-width: 400px;
+    /* You can adjust the width as needed */
+    padding: 20px;
+    background: #f5f5f5;
+    /* Change the background color as desired */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgb(218, 92, 61);
+
+}
+
+#sub_button{
+    border-radius: 5px;
+    padding: 2px;
+    background-color: rgb(12, 159, 221);
+}
