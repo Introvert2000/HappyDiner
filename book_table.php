@@ -6,19 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Table Booking</title>
     <link rel="stylesheet" href="book_table.css">
-    <link rel="stylesheet" href="styles.css"> <!-- You can link to your CSS file here -->
+    <link rel="stylesheet" href="styles.css">
 </head>
-
+<style>
+    body {
+    background-color: #243447; /* Black background color */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+  }
+</style>
 <body>
     <header>
         <nav>
             <div class="container">
                 <div class="logo">
-                    <a href="#">Happy Diner</a>
+                    <a href="./index.php">Happy Diner</a>
                 </div>
-                <div class="search-bar">
+                <!-- <div class="search-bar">
                     <input type="text" placeholder="Search...">
-                </div>
+                </div> -->
                 <div class="menu">
                     <?php
                     session_start();

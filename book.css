@@ -1,4 +1,4 @@
-/* Reset some default styles */
+/* Nav bar */
 * {
     margin: 0;
     padding: 0;
@@ -7,6 +7,7 @@
 
 /* Apply basic styles to the header and navigation */
 header {
+
     background-color: #333;
     color: #fff;
 }
@@ -85,3 +86,40 @@ nav {
         margin-top: 10px;
     }
 }
+
+
+body {
+    background-color: #243447; /* Black background color */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+  }
+/* Styling for the card container */
+.card {
+    background-color: #1db345; /* Dark background color */
+    color: #fff; /* Text color */
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+  }
+
+  /* Styling for the "Book" button */
+  #button_colour {
+    background-color: rgb(218, 92, 61); /* Orange button color */
+    color: #fff; /* Text color */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* Styling for the restaurant name */
+  .product_name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  /* Styling for the image */
+  .image img {
+    max-width: 100%;
+  }
