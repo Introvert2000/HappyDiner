@@ -5,7 +5,10 @@
     <title>Restaurant Reviews</title>
 </head>
 <body>
-    <h1>Restaurant Reviews</h1>
+    <nav>
+        <h1>Restaurant reviews</h1>
+    </nav>
+    <!-- <h1>Restaurant Reviews</h1> -->
 
     <?php
     // Database connection details
@@ -28,12 +31,16 @@
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            echo "<div class='review'>";
-            echo "<h2>" . $row['restaurant_name'] . "</h2>";
-            echo "<p>Rating: " . $row['date1'] . "</p>";
-            echo "<p>Reviewer: " . $row['customer_username'] . "</p>";
-            echo "<p>Rating: " . $row['stars'] . "</p>";
-            echo "<p>Review: " . $row['review_discription'] . "</p>";
+            echo "<div class='out'>";
+            echo "<div class='card'>";
+            echo "<div class='card_content>'";
+            echo "<p><h2 class='restoname'>" . $row['restaurant_name'] . "</h2><p>";
+            echo "<p class='content'>Rating Date: " . $row['date1'] . "</p>";
+            echo "<p class='content'>Reviewer: " . $row['customer_username'] . "</p>";
+            echo "<p class='content'>Rating: " . $row['stars'] . "</p>";
+            echo "<p class='content'>Review: " . $row['review_discription'] . "</p>";
+            echo "</div>";
+            echo "</div>";
             echo "</div>";
         }
     } else {
