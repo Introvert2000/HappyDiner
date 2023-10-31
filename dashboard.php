@@ -54,31 +54,18 @@
                 <div class="logo">
                     <a href="index.php">Happy Diner</a>
                 </div>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search...">
-                   
-                </div>
-                <input type="submit" name="submit" value="Search">
+                
 
                 <div class="menu">
-                   <?php
-                   session_start();
-                   if(empty($_SESSION['Name1']))
-                   {
                    
-                   ?>
-                    <ul>
-                        <li><a href="login.php">Login</a></li>
-                        <li><a href="register.php">Register</a></li>
-                    </ul>
-                    <?php }
-                    else{
+                    
+                    <?php 
+                        session_start();
+                    {
                         ?>
-
                         <ul>
                         <li id="username"> <a><?php if(!empty($_SESSION['Name1'])){ echo $_SESSION['Name1']; }?></a> </li>
-                        </ul>
-                        
+                        </ul>                     
                         <?php
                     }
                     ?>

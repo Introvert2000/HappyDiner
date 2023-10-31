@@ -30,9 +30,7 @@ require_once 'connection.php';
                 <div class="logo">
                     <a href="index.php">Happy Diner</a>
                 </div>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search...">
-                </div>
+                
                 <div class="menu">
                    <?php
                    session_start();
@@ -47,11 +45,20 @@ require_once 'connection.php';
                     <?php }
                     else{
                         ?>
-
-                        <ul>
-                        <li id="username"> <a><?php if(!empty($_SESSION['Name1'])){ echo $_SESSION['Name1']; }?></a> </li>
-                        </ul>
-                        
+                        <div class="dropdown">
+                                <ul>
+                                    <li id="username"><a>
+                                        <?php if (!empty($_SESSION['Name1'])) {
+                                            echo $_SESSION['Name1'];
+                                        } ?>
+                                    </a></li>
+                                </ul>
+                         button class="dropdown-button">&#9660;</button>
+                        <div class="dropdown-content">
+                            <a href="dashboard.php">Dashboard</a>
+                            <a href="logout.php">Logout</a>
+                        </div>
+                    </div>
                         <?php
                     }
                     ?>

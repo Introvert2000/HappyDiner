@@ -10,6 +10,9 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Login</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="font.css">
+    <link rel="stylesheet" href="login.css">
 </head>
 
 
@@ -53,12 +56,10 @@ function myFunction() {
  <button type="Submit" class="btn">Login</button>
 
  <div class="Register-Link">
- <p>Don't have an account? <a href="register.php">Register</a></p>
+ <p>Wanna be a Partner ?<a href="register_restaurant.php">Register</a></p>
  </div>
  </form>
 </div> 
-<footer>
-    Restaurant Partner ?    <a href="login_restaurant.php">Click here</a>.
-</footer>
+
 </body>
 </html>

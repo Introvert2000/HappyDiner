@@ -83,7 +83,7 @@ else{
                 </div>
             </div>
         </nav>
-    </header>
+</header>
 <main>
      <?php
         while($row = mysqli_fetch_assoc($select_query)){

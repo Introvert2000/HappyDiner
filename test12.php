@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,8 +48,28 @@
 
 }
 </style>
-
 </head>
+<<<<<<< Joel
+<header>
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <a href="index.php">Happy Diner</a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="login.php">Login</a></li>
+                    <li><a href="register.php">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+=======
+>>>>>>> main
 
 
 <body>
@@ -63,12 +80,10 @@
                     <a href="#">Happy Diner</a>
                 </div>
                 <div class="search-bar">
-                    <input type="text" id="searchInput" placeholder="Search for names">
-    
+                    <form method="post" action="display.php"><input type="text" placeholder="Search..." name= "search">
                 </div>
-                <button onclick="search()">Search</button>
-                
-            
+                <input type="submit" name="submit">
+            </form>
                 <div class="menu">
                    <?php
                    session_start();
@@ -105,7 +120,9 @@
                   
          </div>
          
-         <a class="btn btn-primary" href="delivery.php" role="button">Order Food</a>
+         <!-- <a class="btn btn-primary" href="delivery.php" id="get-location" role="button">Order Food</a> -->
+         <button id= "get-location-order">Order</button>
+
      </div>
      <div class="card">
          <div class="image">
@@ -115,29 +132,56 @@
                   
          </div>
          
-         <a class="btn btn-primary" href="book.php" role="button">Book</a>
+         <!-- <a class="btn btn-primary" href="book.php" id="get-location" role="button">Book</a> -->
+         <button id= "get-location-book">Book</button>
      </div>
-     <div id="searchResults"></div>     
+     
 </main>
 <script>
-    function search() {
-        var query = document.getElementById("searchInput").value;
-        if (query.trim() !== "") {
-            // Perform an AJAX request to fetch search results
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    // Instead of updating "searchResults", redirect to display.php
-                    window.location.href = "display.php?query=" + query;
-                }
-            };
-            xmlhttp.open("GET", "display.php?query=" + query, true); // Send the query to display.php
-            xmlhttp.send();
+    document.getElementById("get-location-book").onclick = function(){
+    
+    window.location.href = `book.php`
+    } 
+
+
+    document.getElementById("get-location-order").onclick = function() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(gotLocation_order, failed);
         } else {
-            document.getElementById("searchResults").innerHTML = "Please enter a search query.";
+            alert("Geolocation is not supported by this browser.");
         }
+    };
+
+   
+
+    function gotLocation_order(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        // Pass latitude and longitude to the Geoapify API
+        fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&apiKey=6280fa3f1f5e4b7ca8931c01979b1e88`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.features && data.features.length > 0) {
+                    const county = data.features[0].properties.county;
+                    
+                    // Redirect to the next PHP page with the city as a query parameter
+                    window.location.href = `delivery.php?city=${county}`;
+                } else {
+                    alert("City not found");
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching data from the API:", error);
+                alert("Error fetching data from the API");
+            });
     }
+
+    function failed() {
+        alert("Error getting location");
+    }
+
 </script>
+
 </body>
 </html>
-

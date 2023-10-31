@@ -26,27 +26,7 @@
     </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="container">
-                <div class="logo">
-                    <a href="index.php">Happy Diner</a>
-                </div>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search...">
-                   
-                </div>
-                <input type="submit" name="submit" value="Search">
-
-                <div class="menu">
-                    <ul>
-                        <li><a href="login.php">Login</a></li>
-                        <li><a href="register.php">Register</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+   
     <div class="containerz">
         <form method="post">
             <div class="wrapper">
@@ -107,6 +87,7 @@ session_start();
 include_once('connection.php');
 if($_SERVER['REQUEST_METHOD']=='POST'){
   
+    $conn = mysqli_connect("localhost","root","","login");
   
   $Name1 = $_POST['Name1'];
   $Username = $_POST['Username'];
@@ -114,41 +95,30 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
   $MobileNo = $_POST['MobileNo'];
   $Password1 = md5($_POST['Password1']);
   
-  // $servername = "localhost";
-  //   $username = "root";
-  //   $password = "";
-  //   $database = "login";
+  $stmt = $conn->prepare("SELECT * FROM reg WHERE Username = ? OR email = ? OR MobileNo = ?");
+
+    $stmt->bind_param("sss", $Username, $Email, $Phone);
+    $stmt->execute();
+    $stmt_result = $stmt->get_result();
+
+    if ($stmt_result->num_rows > 0) {
+        // If any of the fields already exist in the database, display an error message
+        echo '<script type="text/javascript">alert("Email, Username, or Phone already exists in the database.");</script>';
+    } else {
 
 
-    $conn = mysqli_connect("localhost","root","","login");
   
   
-  // $sql = "INSERT INTO `reg` (`Name1`, `Username`, `email`,`Mobile`,`Password1`) VALUES
-  //  ('$Name1', '$Username', '$email','$MobileNo','$Password1);";
-
-
-  // $result = mysqli_query($conn,$sql);
-//   // if($result){
-//   //   echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-//   //   <strong>Success your entry is submited</strong> You should check in on some of those fields below.
-//   //   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-//   //   </div>';
-
 
 $stmt=$conn->prepare("INSERT INTO reg(Name1,Username,email,MobileNo,Password1) VALUES(?,?,?,?,?)");
     $stmt->bind_param("sssis",$Name1,$Username,$email,$MobileNo,$Password1);
     $stmt->execute();
     echo "Registration Successful";
     $stmt->close();
-  }
-  
-  
-  
-  
-  //session_start();
-  
-  
-  if(isset($_REQUEST['Submit']))
+
+
+
+    if(isset($_REQUEST['Submit']))
   {
     $email = $_REQUEST['email'];
     $select_query = mysqli_query($connection,"select * from reg where email='$email'");
@@ -199,6 +169,15 @@ else
 }
 $conn->close();
 }
+  }
+  
+}
+  
+  
+
+  
+  
+  
 
 
 ?>
