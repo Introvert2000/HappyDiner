@@ -16,10 +16,9 @@ require_once 'connection.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product</title>
-    <link rel="stylesheet" href="font.css">
-    <!-- <link rel="stylesheet" href="styles.css"> -->
     <link rel="stylesheet" href="book.css">
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+   
+    
 </head>
 
 
@@ -45,15 +44,15 @@ require_once 'connection.php';
                     <?php }
                     else{
                         ?>
-                        <div class="dropdown">
-                                <ul>
-                                    <li id="username"><a>
-                                        <?php if (!empty($_SESSION['Name1'])) {
-                                            echo $_SESSION['Name1'];
-                                        } ?>
-                                    </a></li>
-                                </ul>
-                         button class="dropdown-button">&#9660;</button>
+                    <div class="dropdown">
+                        <ul>
+                            <li id="username"><a>
+                                <?php if (!empty($_SESSION['Name1'])) {
+                                    echo $_SESSION['Name1'];
+                                } ?>
+                            </a></li>
+                        </ul>
+                        <button class="dropdown-button">&#9660;</button>
                         <div class="dropdown-content">
                             <a href="dashboard.php">Dashboard</a>
                             <a href="logout.php">Logout</a>
@@ -81,14 +80,20 @@ require_once 'connection.php';
          <div class="caption">
             <?php 
             $restaurantName=$row['restaurant_name'];
+            
             $_SESSION['restaurant']=$restaurantName;
             ?>
                 <div>
                    <p class="product_name"><?php echo $restaurantName; ?></p>
                 </div>
-            
+                <div class="mainart">
+                <p class="price">$20</p>
+                <div class="revi">
+                <p class="price">3</p>
+                <img class="star" src="star-svgrepo-com.svg" alt="">
+                </div>
+                </div>
             <button type="button" id="button_colour" onclick="displaySelectedOption(`<?php echo $restaurantName; ?>`)">Book</button>
-   
             <script>
                     function displaySelectedOption(restaurantName) {
                         window.location.href = `book_table.php?restaurantName=${restaurantName}`;
@@ -104,4 +109,3 @@ require_once 'connection.php';
 
 </body>
 </html>
-

@@ -83,7 +83,7 @@
             $result = $stmt->get_result();
 
            
-
+//displaying search result of index 
             if ($result->num_rows > 0) {
             
                 while ($row = $result->fetch_assoc()) {
@@ -107,6 +107,9 @@
             <!-- <input type="submit" id="Submit" name="Submit" value="Book" class="btn btn-success" /> -->
             <button  type="button" onclick="displaySelectedOptionOrder(`<?php echo $restaurantName; ?>`)">Order</button>
             <button    type="button" onclick="displaySelectedOptionBook(`<?php echo $restaurantName; ?>`)">Book</button>
+    
+    
+    
     <script>
         function displaySelectedOptionOrder(restaurantName) {
             window.location.href = `delivery_product.php?restaurantName=${restaurantName}`;

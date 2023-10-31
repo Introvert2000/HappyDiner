@@ -6,14 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Table Booking</title>
     <link rel="stylesheet" href="book_table.css">
-
+    <link rel="stylesheet" href="dropdown.css">
     <link rel="stylesheet" href="styles.css"> 
 
 
 </head>
 <style>
     body {
-    background-color: #243447; /* Black background color */
     margin: 0; /* Remove default margin */
     padding: 0; /* Remove default padding */
   }
@@ -41,13 +40,20 @@
                     <?php } else {
                         ?>
 
+                    <div class="dropdown">
                         <ul>
-                            <li id="username"> <a>
-                                    <?php if (!empty($_SESSION['Name1'])) {
-                                        echo $_SESSION['Name1'];
-                                    } ?>
-                                </a> </li>
+                            <li id="username"><a>
+                                <?php if (!empty($_SESSION['Name1'])) {
+                                    echo $_SESSION['Name1'];
+                                } ?>
+                            </a></li>
                         </ul>
+                        <button class="dropdown-button">&#9660;</button>
+                        <div class="dropdown-content">
+                            <a href="dashboard.php">Dashboard</a>
+                            <a href="logout.php">Logout</a>
+                        </div>
+                    </div>
 
                         <?php
                     }
