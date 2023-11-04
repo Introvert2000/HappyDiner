@@ -83,6 +83,7 @@ if($con->connect_error){
     if($stmt_result->num_rows > 0){
         $data = $stmt_result->fetch_assoc();
         if($data['Password1']===$Password1){
+            $_SESSION['Name1'] = $data['Name1'];
             header('location:dashboard.php');
         }
         else{

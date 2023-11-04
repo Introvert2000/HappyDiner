@@ -16,8 +16,6 @@
             height: 400px;
             width: 50%;
         }
-        
-        
     </style>
 
     <style>
@@ -128,10 +126,9 @@
         }
         ?>
 
-        <div id="map"></div>
 
-        <script>
-        var map = L.map("map").setView([<?php echo $latitude; ?>, <?php echo $longitude; ?>], 12);
+<script>
+    var map = L.map("map").setView([<?php echo $latitude; ?>, <?php echo $longitude; ?>], 12);
 
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
             maxZoom: 19,
@@ -168,12 +165,19 @@
             routeWhileDragging: true,
             geocoder: L.Control.Geocoder.nominatim(),
         }).addTo(map);
-    </script>
+        </script>
 
-        <div class="review">
-            <!-- Fetch reviews from the source and display them here -->
-        </div>
-    </main>
+<div id="orderConfirmationModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeOrderModal">&times;</span>
+        <div id="map"></div>        
+        <button id="confirmOrderButton">Confirm Order</button>
+    </div>
+</div>
+<div class="review">
+    <!-- Fetch reviews from the source and display them here -->
+</div>
+</main>
 
     <footer>
         <p>&copy; <?php echo date("Y"); ?> <?php echo $restaurantName; ?></p>

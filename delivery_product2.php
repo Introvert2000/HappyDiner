@@ -54,7 +54,6 @@
 <?php
 require_once 'connect_rest.php';
 $restaurantName = $_GET['restaurantName'];
-$_SESSION['delivery_restaurant']=$restaurantName;
 $select_query = mysqli_query($connection, "SELECT * FROM `$restaurantName`");
 ?>
 
@@ -101,59 +100,9 @@ $select_query = mysqli_query($connection, "SELECT * FROM `$restaurantName`");
 </div>
 
 <script>
+    // JavaScript code for cart functionality
     const cartItems = [];
     let total = 0;
-    const proceedToCheckoutButton = document.getElementById("proceed-to-checkout");
-        proceedToCheckoutButton.addEventListener("click", function () {
-            // Check if the user is logged in
-            const isUserLoggedIn = <?php echo empty($_SESSION['Name1']) ? 'false' : 'true'; ?>;
-            
-            if (isUserLoggedIn) {
-                // Redirect to the payment.php page if logged in
-                proceedToCheckoutButton.addEventListener("click", openOrderConfirmationModal);
-
-        // Get the order confirmation modal and buttons
-        const orderConfirmationModal = document.getElementById("orderConfirmationModal");
-        const closeOrderModalButton = document.getElementById("closeOrderModal");
-        const confirmOrderButton = document.getElementById("confirmOrderButton");
-
-        function openOrderConfirmationModal() {
-            orderConfirmationModal.style.display = "block";
-        }
-
-        closeOrderModalButton.addEventListener("click", closeOrderConfirmationModal);
-        confirmOrderButton.addEventListener("click", proceedToCheckout);
-
-        function closeOrderConfirmationModal() {
-            orderConfirmationModal.style.display = "none";
-        }
-
-        function proceedToCheckout() {
-            // Redirect to the payment.php page
-            const restaurantName = "<?php echo $restaurantName; ?>";
-        window.location.href = `payment.php?restaurantName=${restaurantName}`;
-        }
-
-        function openOrderConfirmationModal() {
-            // Clear previous order summary
-            document.getElementById("orderSummary").innerHTML = "";
-
-            // Populate order summary
-            cartItems.forEach(item => {
-                const orderSummaryItem = document.createElement("div");
-                orderSummaryItem.textContent = `${item.name} - $${item.price}`;
-                document.getElementById("orderSummary").appendChild(orderSummaryItem);
-            });
-
-            orderConfirmationModal.style.display = "block";
-        }
-            } else {
-                // Display an alert if the user is not logged in
-                alert("Please log in before proceeding to checkout.");
-            }
-        });
-
-    // JavaScript code for cart functionality
 
     // Add event listeners to all "Order" buttons
     const orderButtons = document.querySelectorAll(".order-button");
@@ -162,8 +111,29 @@ $select_query = mysqli_query($connection, "SELECT * FROM `$restaurantName`");
     });
 
     // Add event listener for "Proceed to Checkout" button
-    // const proceedToCheckoutButton = document.getElementById("proceed-to-checkout");
-    
+    const proceedToCheckoutButton = document.getElementById("proceed-to-checkout");
+    proceedToCheckoutButton.addEventListener("click", openOrderConfirmationModal);
+
+    // Get the order confirmation modal and buttons
+    const orderConfirmationModal = document.getElementById("orderConfirmationModal");
+    const closeOrderModalButton = document.getElementById("closeOrderModal");
+    const confirmOrderButton = document.getElementById("confirmOrderButton");
+
+    function openOrderConfirmationModal() {
+        orderConfirmationModal.style.display = "block";
+    }
+
+    closeOrderModalButton.addEventListener("click", closeOrderConfirmationModal);
+    confirmOrderButton.addEventListener("click", proceedToCheckout);
+
+    function closeOrderConfirmationModal() {
+        orderConfirmationModal.style.display = "none";
+    }
+
+    function proceedToCheckout() {
+        // Redirect to the payment.php page
+        window.location.href = 'payment2.php';
+    }
 
     function addToCart(event) {
         const itemName = event.target.getAttribute("data-name");
@@ -197,9 +167,19 @@ $select_query = mysqli_query($connection, "SELECT * FROM `$restaurantName`");
         cartTotal.textContent = total.toFixed(2); // Display total with two decimal places
     }
 
-    
+    function openOrderConfirmationModal() {
+            // Clear previous order summary
+            document.getElementById("orderSummary").innerHTML = "";
 
-        
+            // Populate order summary
+            cartItems.forEach(item => {
+                const orderSummaryItem = document.createElement("div");
+                orderSummaryItem.textContent = `${item.name} - $${item.price}`;
+                document.getElementById("orderSummary").appendChild(orderSummaryItem);
+            });
+
+            orderConfirmationModal.style.display = "block";
+        }
 </script>
 
 <style>

@@ -23,7 +23,7 @@
             // Retrieve reservation details from the database based on a unique identifier (e.g., reservation ID)
             $reservation_id = $_GET['reservation_id']; // Assuming you have a unique identifier for reservations
 
-            $sql = "SELECT * FROM reservations WHERE id = " . $reservation_id;
+            $sql = "SELECT * FROM reservations WHERE booking_id = " . $reservation_id;
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {

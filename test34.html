@@ -1,0 +1,61 @@
+<?php
+// Database connection parameters
+$servername = "your_server_name";
+$username = "your_username";
+$password = "your_password";
+$dbname = "your_database_name";
+
+// Create a connection to the MySQL database
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// SQL query to retrieve reservations
+$sql = "SELECT * FROM reservations";
+$result = $conn->query($sql);
+$reservations = [];
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $reservations[] = $row;
+    }
+}
+
+$conn->close();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation List</title>
+    <style>
+        /* Add your CSS styles here */
+        .reservation-card {
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #f8f8f8;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reservation List</h1>
+
+    <div class="container">
+        <?php foreach ($reservations as $reservation) : ?>
+            <div class="reservation-card">
+                <h2>Reservation ID: <?php echo $reservation['reservation_id']; ?></h2>
+                <p>Customer Name: <?php echo $reservation['customer_name']; ?></p>
+                <p>Reservation Date: <?php echo $reservation['reservation_date']; ?></p>
+                <!-- Add more reservation details here -->
+            </div>
+        <?php endforeach; ?>
+    </div>
+</body>
+</html>

@@ -27,9 +27,9 @@
 </style>
 <?php
 session_start();
-if (empty($_SESSION['Name1'])) {
+if (empty($_SESSION['restaurant_name'])) {
   echo '<script>alert("Session has expired. Please log in again.");</script>';
-  echo '<script>window.location = "login.php";</script>';
+  echo '<script>window.location = "login_restaurant.php";</script>';
   exit;
 }
 include_once('connection.php');
@@ -41,7 +41,7 @@ if(isset($_REQUEST['otp_verify']))
   if($count>0)
   {
     $select_query = mysqli_query($connection, "update tbl_otp_check set is_expired=1 where otp='$otp'");
-    header('location:index.php');
+    header('location:dashboard_restaurant.php');
   }
   else
   {
