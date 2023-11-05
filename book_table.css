@@ -28,8 +28,11 @@ body {
 
 }
 
-#sub_button{
+.sub_button:hover{
+    margin: 20px 0 10px 0;
     border-radius: 5px;
     padding: 2px;
-    background-color: rgb(12, 159, 221);
+    background-color: rgb(221, 122, 122);
 }
+
+

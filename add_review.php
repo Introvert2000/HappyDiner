@@ -2,30 +2,34 @@
 <html>
 <head>
     <title>Add a Review</title>
+    <link rel="stylesheet" href="add_review.css">
 </head>
 <body>
-    <h1>Add a Review</h1>
+    <div class="flex">
+    <h1 class="naving">Add a Review</h1>
 
-    <form method="post" action="add_review.php">
-        <label for="restaurant_name">Restaurant Name:</label>
-        <input type="text" name="restaurant_name" required><br><br>
+    <form method="post" action="add_review.php" class="form">
+    <label for="restaurant_name">Restaurant Name:</label>
+    <input class="inputForm" type="text" name="restaurant_name" required><br><br>
 
-        <label for="customer_name">Your Name:</label>
-        <input type="text" name="customer_name" required><br><br>
+    <label for="customer_name">Your Name:</label>
+    <input type="text" class="inputForm" name="customer_name" required><br><br>
 
-        <label for="date">Your Name:</label>
-        <input type="date" name="date" required><br><br>
+    <label for="date">Your Name:</label>
+    <input type="date" class="inputForm" name="date" required><br><br>
 
-        <label for="stars">Rating:</label>
-        <input type="number" name="stars" min="1" max="5" required><br><br>
+    <label for="stars">Rating:</label>
+    <input type="number" class="inputForm" name="stars" min="1" max="5" required><br><br>
 
-        <label for="review_discription">Review:</label>
-        <textarea name="review_discription" rows="4" required></textarea><br><br>
+    <label for="review_discription">Review:</label>
+    <textarea class="inputForm" name="review_discription" rows="4" required></textarea><br><br>
 
-        <input type="submit" value="Submit Review">
+    <input type="submit" class="button-submit" "Submit Review">
     </form>
+    <a class="custom-btn btn-1" href="reviews.php">Back to Reviews</a>
+    </div>
 
-    <a href="reviews.php">Back to Reviews</a>
+   
 
     <?php
     // Check if the form is submitted

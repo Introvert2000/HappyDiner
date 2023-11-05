@@ -51,6 +51,6 @@
     $conn->close();
     ?>
 
-    <a href="add_review.php">Add a Review</a>
+    <a class="btn" href="add_review.php">Add a Review</a>
 </body>
 </html>
