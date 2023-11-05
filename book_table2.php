@@ -7,143 +7,12 @@
     <link rel="stylesheet" href="book_table.css">
     <link rel="stylesheet" href="dropdown.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./brocode.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-Rf8PMTZiP7Q9fSAnjYDEExSLFWS13mpOv3JWea1ylpdiBtBqgF5tDDzwe5f5f5Cym" crossorigin="anonymous">
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <style>
-        /* Set the map container's size */
-        #map {
-            height: 400px;
-            width: 100%; /* Adjust width to take the full available width */
-        }
-    </style>
-    <style>
-        .section-container {
-            display: flex;
-        }
-
-        .section-1 {
-    flex: 3;
-    background-color: #007BFF;
-    color: #fff;
-    padding: 20px;
-}
-
-.restaurant-info {
-    display: flex;
-    align-items: center;
-}
-
-.restaurant-image {
-    flex: 1;
-    margin-right: 20px;
-}
-
-.restaurant-image img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-}
-
-.restaurant-details {
-    flex: 2;
-}
-
-.restaurant-details h2 {
-    font-size: 24px;
-    margin: 0;
-}
-
-.restaurant-details p {
-    font-size: 16px;
-    margin: 8px 0;
-}
-
-
-.section-2 {
-    flex: 2;
-    background-color: #f4f4f4;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-.time-selection-container {
-    margin-top: 20px;
-}
-
-.time-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-/* Customize the guest count dropdown */
-#guestCount {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 5px;
-    width: 100px; /* Adjust the width as needed */
-}
-
-/* Style the date selection input */
-#reservationDate {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 5px;
-    width: 150px; /* Adjust the width as needed */
-}
-
-/* Remove the browser's default date input arrow button */
-#reservationDate::-webkit-inner-spin-button,
-#reservationDate::-webkit-calendar-picker-indicator {
-    display: none;
-}
-
-.time-buttons button {
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 15px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.time-buttons button:hover {
-    background-color: #0056b3;
-}
-
-#customTimeButton {
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 15px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-right: 10px;
-}
-
-#customTimeButton:hover {
-    background-color: #0056b3;
-}
-
-#customTimeInput {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 5px;
-    margin-right: 10px;
-}
-
-#customTimeInput:focus {
-    border-color: #007BFF;
-    outline: none;
-}
-
-    </style>
+       
 </head>
 <body>
 <header>
@@ -188,11 +57,11 @@
         
         <div class="section-container"> <!-- Add this div to contain both sections -->
         <div class="section-1">
-            <div class="restaurant-det">
+            <div class="restaurant-dev">
             <?php
     $restaurantName = $_GET['restaurantName'];
     ?>
-
+<div class="restaurant-image">
         <?php
             $servername = "localhost";
             $username = "root";
@@ -236,8 +105,9 @@
 
             $stmt->close();
         ?>
-
 </div>
+</div>
+<div class="restaurant-details">
 <?php
         $servername = "localhost";
         $username = "root";
@@ -259,6 +129,7 @@
             $longitude = $row["longitude"];
         }
         ?>
+</div>
 <div class="map" id="map">
 
 <script>
@@ -332,7 +203,7 @@ var map = L.map("map").setView([<?php echo $latitude; ?>, <?php echo $longitude;
 
     <div class="time-selection-container">
         <div class="time-buttons"></div>
-        <button id="customTimeButton" onclick="showCustomTimeInput()">+</button>
+        <button id="customTimeButton" onclick="showCustomTimeInput()">Time</button>
         <input type="time" id="customTimeInput" style="display: none;">
         <script>
     // Get the current date and format it as YYYY-MM-DD
@@ -408,7 +279,6 @@ for (let i = 0; i <= 4; i++) {
         }
     </script>
 </div>
-I'v
 </body>
 </html>
                 
