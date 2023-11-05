@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="book_table.css">
     <link rel="stylesheet" href="dropdown.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="./brocode.css">
+    <link rel="stylesheet" href="./book_table2.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-Rf8PMTZiP7Q9fSAnjYDEExSLFWS13mpOv3JWea1ylpdiBtBqgF5tDDzwe5f5f5Cym" crossorigin="anonymous">
 
