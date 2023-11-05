@@ -278,7 +278,7 @@ $conn->close();
     <div id="sidenav">
         <a href="reservation.php">Check Bookings</a>
         <a href="order.php">Check Orders</a>
-        <a href="logout_rest">Logout</a>
+        <a href="logout_rest.php">Logout</a>
         <!-- Add more navigation links as needed -->
     </div>
    

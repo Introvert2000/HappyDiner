@@ -303,8 +303,5 @@
             });
         });
     </script>
-
-<button class="back-button" onclick="window.location.href='dashboard_restaurant.php'">Back to Dashboard</button>
-
 </body>
 </html>
