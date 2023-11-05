@@ -8,42 +8,55 @@
     <style>
         /* Add your CSS styles here */
 		
-        body {
-			font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-		
-        .containerz {
-			max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-        }
+        <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
 
-        h1 {
-            text-align: center;
-        }
-		
-        .account-info {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 20px;
-        }
-		
-        .booking-history,
-        .orders-history {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 20px;
-        }
+    .containerz {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+    }
 
-        .order-details {
-			margin-top: 10px;
-        }
+    h1 {
+        text-align: center;
+    }
+
+    .account-info {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .booking-history,
+    .orders-history {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .orders-history {
+        float: right; /* Float to the right for a separate column */
+        width: 45%; /* Adjust the width as needed */
+    }
+
+    .order-details {
+        margin-top: 10px;
+    }
+
+    /* Clear float to avoid overlapping columns */
+    .clear {
+        clear: both;
+    }
+</style>
+
 		</style>
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -82,7 +95,7 @@
         </div>
 
     <div class="booking-history">
-<?php
+        <?php
                $host = 'localhost';
                $username = 'root';
                $password = '';
@@ -138,7 +151,8 @@
                $mysqli->close();
                
 ?>
-
+</div>
+<div class="orders-history">
 <?php
 // Connect to the database
 $host = 'localhost';
@@ -185,6 +199,7 @@ if ($ordersStmt->execute()) {
         while ($orderData = $ordersResult->fetch_assoc()) {
             echo "<h2>Order ID: " . $orderData['order_id'] . "</h2>";
             echo "Order Date: " . $orderData['order_date'] . "<br>";
+            echo '<a href="order_details.php?orderID=' . $orderData['order_id'] . '" class="btn-link">View Details</a>';
 
             // Place the code to fetch and display order items here
             $orderItemsSql = "SELECT item_name, item_price FROM order_items WHERE order_id = ?";
