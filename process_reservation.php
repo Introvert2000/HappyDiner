@@ -1,57 +1,39 @@
 <?php
-session_start();
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $restaurantName = $_POST['restaurantName'];
-        $name = $_POST["name"];
-        $date = $_POST["date"];
-        $time = $_POST["time"];
+// Establish a database connection
+$host = 'localhost';
+$username = 'root';
+$password = '';
+$database = 'login';
+$conn = new mysqli($host, $username, $password, $database);
 
-        // Create a database connection (replace with your database credentials)
-        $conn = new mysqli("localhost", "root", "", "login");
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+// Get data from the form
+$restaurantName = $_POST['restaurantName'];
+$name = $_POST['name'];
+$email = $_POST['email'];
+$phone = $_POST['phone'];
+$date = $_POST['date'];
+$time = $_POST['time'];
+$guests = $_POST['guests'];
 
-        
-        {
-            // The date and time are available, so proceed with the reservation
-            $email = $_POST["email"];
-            $phone = $_POST["phone"];
-            $num_of_guests = $_POST["guests"];
-            
+// Prepare and execute the SQL query to insert data
+$sql = "INSERT INTO reservations (restaurant_name, name, email, phone, booking_date, booking_time, num_of_guests) 
+        VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-            // Insert the reservation into the database
-            $stmt = $conn->prepare("INSERT INTO reservations (name, date, email, phone, time, num_of_guests, restaurant_name) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("sssssis", $name, $date, $email, $phone, $time, $num_of_guests, $restaurantName);
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("ssssssi", $restaurantName, $name, $email, $phone, $date, $time, $guests);
 
-            if ($stmt->execute()) {
+if ($stmt->execute()) {
+    echo "<script>alert('Reservation successfully saved in the database.')</script>";
+    echo "<script>location.href='dashboard.php';</script>";
+} else {
+    echo "Error: " . $stmt->error;
+}
 
-                                        $stmt1 = $conn->prepare("SELECT id FROM your_table WHERE name = ?");
-                        $stmt1->bind_param("s", $name); // "s" means the variable is a string
-
-                        // Execute the prepared statement
-                        $stmt1->execute();
-
-                        // Bind the result
-                        $stmt->bind_result($id);
-
-                        // Fetch the result
-                        if ($stmt1->fetch()) {
-                            echo "ID: " . $id;
-                        } else {
-                            echo "No record found with the given name.";
-                        }
-                header('location:detail.php');
-                                    }
-            else {
-                echo "Error: " . $stmt->error;
-            }
-        }
-
-        $stmt->close();
-        $conn->close();
-    }
-    ?>
-
-    
+// Close the database connection
+$stmt->close();
+$conn->close();
+?>

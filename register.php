@@ -72,7 +72,7 @@
       </form>
     </div>
 <footer>
-   Want to be a Restaurant Partner ?    <a href="register_restaurant.php">Register</a>.
+   Want to be a Restaurant Partner ?    <a href="register_restaurant2.php">Register</a>.
 </footer>
 
 </body>
@@ -110,7 +110,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
   
   
 
-$stmt=$conn->prepare("INSERT INTO reg(Name1,Username,email,MobileNo,Password1) VALUES(?,?,?,?,?)");
+    $stmt=$conn->prepare("INSERT INTO reg(Name1,Username,email,MobileNo,Password1) VALUES(?,?,?,?,?)");
     $stmt->bind_param("sssis",$Name1,$Username,$email,$MobileNo,$Password1);
     $stmt->execute();
     echo "Registration Successful";

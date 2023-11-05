@@ -7,8 +7,7 @@
 ?
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="dropdown.css">
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
-
+    
 </head>
 <body>
 <header>
@@ -83,7 +82,7 @@
             $result = $stmt->get_result();
 
            
-
+//displaying search result of index 
             if ($result->num_rows > 0) {
             
                 while ($row = $result->fetch_assoc()) {
@@ -107,6 +106,9 @@
             <!-- <input type="submit" id="Submit" name="Submit" value="Book" class="btn btn-success" /> -->
             <button  type="button" onclick="displaySelectedOptionOrder(`<?php echo $restaurantName; ?>`)">Order</button>
             <button    type="button" onclick="displaySelectedOptionBook(`<?php echo $restaurantName; ?>`)">Book</button>
+    
+    
+    
     <script>
         function displaySelectedOptionOrder(restaurantName) {
             window.location.href = `delivery_product.php?restaurantName=${restaurantName}`;

@@ -20,8 +20,8 @@ else{
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product</title>
-    <link rel="stylesheet" href="font.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="book.css">
+
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
 <style>
     .custom-button {
@@ -54,10 +54,7 @@ else{
             <div class="container">
                 <div class="logo">
                     <a href="#">Happy Diner</a>
-                </div>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search...">
-                </div>
+                </div>                
                 <div class="menu">
                    <?php
                    session_start();
@@ -90,32 +87,39 @@ else{
 
     ?>
      <div class="card">
-         <div class="image">
+            <div class="image">
              
              <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" />
 
         
             </div>
-         <div class="caption">
-        <form method="POST" action="test6.php" >
-            <?php 
-            $restaurantName=$row['restaurant_name'];
-            $_SESSION['restaurant']=$restaurantName;
-            ?>
-        <p class="product_name"><?php echo $restaurantName; ?></p>
-            <!-- <p class="product_name". ><?php echo $row["restaurant_name"]; ?></p>  -->
-            
-            <!-- <input type="submit" id="Submit" name="Submit" value="Book" class="btn btn-success" /> -->
-            <button type="button" onclick="displaySelectedOption(`<?php echo $restaurantName; ?>`)">Book</button>
-    <script>
-        function displaySelectedOption(restaurantName) {
-            window.location.href = `delivery_product.php?restaurantName=${restaurantName}`;
-        }
-    </script>
-</div>
+        <div class="caption">
+           
+                <?php 
+                $restaurantName=$row['restaurant_name'];
+                $_SESSION['restaurant']=$restaurantName;
+                ?>
+
+            <div>
+                   <p class="product_name"><?php echo $restaurantName; ?></p>
+                </div>
+                <div class="mainart">
+                <p class="price">$20</p>
+                <div class="revi">
+                <p class="price">3</p>
+                <img class="star" src="star-svgrepo-com.svg" alt="">
+                </div>
+                </div>
+            <button type="button" id="button_colour" onclick="displaySelectedOption(`<?php echo $restaurantName; ?>`)">Order</button>
+            <script>
+                function displaySelectedOption(restaurantName) {
+                    window.location.href = `delivery_product.php?restaurantName=${restaurantName}`;
+                }
+            </script>
+        </div>
          
 
-         </form>
+        </form>
 
      </div>
      <?php

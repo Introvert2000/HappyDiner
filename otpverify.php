@@ -27,9 +27,10 @@
 </style>
 <?php
 session_start();
-if(empty($_SESSION['Name1']))
-{
-  header('location:index.php');
+if (empty($_SESSION['Name1'])) {
+  echo '<script>alert("Session has expired. Please log in again.");</script>';
+  echo '<script>window.location = "login.php";</script>';
+  exit;
 }
 include_once('connection.php');
 if(isset($_REQUEST['otp_verify']))
