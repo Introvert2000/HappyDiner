@@ -96,7 +96,7 @@ require_once 'connection.php';
             <button type="button" id="button_colour" onclick="displaySelectedOption(`<?php echo $restaurantName; ?>`)">Book</button>
             <script>
                     function displaySelectedOption(restaurantName) {
-                        window.location.href = `book_table.php?restaurantName=${restaurantName}`;
+                        window.location.href = `book_table2.php?restaurantName=${restaurantName}`;
                     }
             </script>
         </div>
