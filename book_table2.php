@@ -93,8 +93,8 @@
                     echo "<h2>{$restaurantName}</h2>";
                     echo "<p>Address: " . $row["city"] . "</p>";
                     echo "<p>Email: " . $row["owner_email"] . "</p>";
-                    echo "<p>Cost for 2: " . $row["recommen_price"] . "</p>";
-                    echo "<p>" . $row["restauant_rating"] . "/5</p>";
+                    echo "<p class='costi'>Cost for 2: " . $row["recommen_price"] . "</p>";
+                    echo "<p class='rowi'>" . $row["restauant_rating"] . "/5</p>";
                     echo "<p>Cuisine: " . $row["cuisine"] . "</p>";
                     echo "</div>";
                     echo "</div>";
@@ -203,14 +203,14 @@ var map = L.map("map").setView([<?php echo $latitude; ?>, <?php echo $longitude;
 
     <div class="time-selection-container">
         <div class="time-buttons"></div>
-        <button id="customTimeButton" onclick="showCustomTimeInput()">Time</button>
+        <button id="customTimeButton" onclick="showCustomTimeInput()">+</button>
         <input type="time" id="customTimeInput" style="display: none;">
         <script>
     // Get the current date and format it as YYYY-MM-DD
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
+    const now1 = new Date();
+    const year = now1.getFullYear();
+    const month = String(now1.getMonth() + 1).padStart(2, '0');
+    const day = String(now1.getDate()).padStart(2, '0');
     const currentDate = `${year}-${month}-${day}`;
 
     // Set the default value for the date input
@@ -254,18 +254,18 @@ for (let i = 0; i <= 4; i++) {
         }
 
         // Get the current time
-        const now = new Date();
+        const now2 = new Date();
 
         // Calculate the next 4 hours
-        const timeButtons = document.querySelector('.time-buttons');
+        const timeButtons1 = document.querySelector('.time-buttons');
         for (let i = 1; i <= 4; i++) {
-            const nextHour = new Date(now);
-            nextHour.setHours(now.getHours() + i);
+            const nextHour = new Date(now2);
+            nextHour.setHours(now2.getHours() + i);
             const formattedTime = padZero(nextHour.getHours()) + ':' + padZero(nextHour.getMinutes());
             const button = document.createElement('button');
             button.textContent = formattedTime;
             button.addEventListener('click', () => selectTime(formattedTime));
-            timeButtons.appendChild(button);
+            timeButtons1.appendChild(button);
         }
 
         function selectTime(time) {

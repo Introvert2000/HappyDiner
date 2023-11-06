@@ -21,22 +21,26 @@ body {
    justify-content: center;
    text-align: left;
    padding: 20px;
+   background-color: #fff;
+   margin: 20px;
+   border-radius: 10px;
 }
 
 .restaurant-info {
    display: flex;
    flex-direction: column;
-   align-items: left;
+   
 }
 
 .restaurant-info {
     display: flex;
     align-items: left;
+    padding: 10px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .restaurant-image {
     flex: 1;
-    margin-right: 20px;
 }
 
 
@@ -52,7 +56,8 @@ body {
 
 .restaurant-details h2 {
     font-size: 24px;
-    margin: 0;
+    margin: 20px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .restaurant-details p {
@@ -63,7 +68,8 @@ body {
 
 .section-2 {
     flex: 2;
-    background-color: #901414;
+    background-color: #fff;
+    height: auto;
     padding: 20px;
     margin: 20px;
     border-radius: 8px;
@@ -144,4 +150,8 @@ body {
 #customTimeInput:focus {
     border-color: #b36800;
     outline: none;
+}
+
+.costi{
+    align-self: flex-end;
 }

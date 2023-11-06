@@ -14,15 +14,14 @@ main{
     max-width: 1500px;
     width: 95%;
     margin: 30px auto;
-    display: flex ;
-    flex-wrap: wrap;
+    display: grid ;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     justify-content: space-between;
     margin: auto;
 }
 
 main .card{
     width: 300px;
-    flex:1 1 210px;
     text-align: center;
     height: 400px;
     border: 1px solid lightgray;
