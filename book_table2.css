@@ -1,0 +1,157 @@
+ /* Set the map container's size */
+ #map {
+    height: 400px;
+    width: 100%;
+    /* Adjust width to take the full available width */
+}
+body {
+   background-color: rgb(222, 222, 222); /* Black background color */
+   margin: 0; /* Remove default margin */
+   padding: 0; /* Remove default padding */
+ }
+
+.section-container {
+    display: flex;
+}
+
+.section-1 {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   text-align: left;
+   padding: 20px;
+   background-color: #fff;
+   margin: 20px;
+   border-radius: 10px;
+}
+
+.restaurant-info {
+   display: flex;
+   flex-direction: column;
+   
+}
+
+.restaurant-info {
+    display: flex;
+    align-items: left;
+    padding: 10px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.restaurant-image {
+    flex: 1;
+}
+
+
+.restaurant-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.restaurant-details {
+    flex: 2;
+}
+
+.restaurant-details h2 {
+    font-size: 24px;
+    margin: 20px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.restaurant-details p {
+    font-size: 16px;
+    margin: 8px 0;
+}
+
+
+.section-2 {
+    flex: 2;
+    background-color: #fff;
+    height: auto;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.time-selection-container {
+    margin-top: 20px;
+}
+
+.time-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* Customize the guest count dropdown */
+#guestCount {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    width: 100px;
+    /* Adjust the width as needed */
+}
+
+/* Style the date selection input */
+#reservationDate {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+    /* Adjust the width as needed */
+}
+
+/* Remove the browser's default date input arrow button */
+#reservationDate::-webkit-inner-spin-button,
+#reservationDate::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+.time-buttons button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.time-buttons button:hover {
+    background-color: #b36800;
+}
+
+#customTimeButton {
+    background-color: #b36800;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 10px;
+}
+
+#customTimeButton:hover {
+    background-color: #b36800;
+}
+
+#customTimeInput {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+#customTimeInput:focus {
+    border-color: #b36800;
+    outline: none;
+}
+
+.costi{
+    align-self: flex-end;
+}
