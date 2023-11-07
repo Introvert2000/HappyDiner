@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Establish a database connection
 $host = 'localhost';
 $username = 'root';
@@ -11,20 +12,32 @@ if ($conn->connect_error) {
 }
 
 // Get data from the form
-$restaurantName = $_POST['restaurantName'];
-$name = $_POST['name'];
-$email = $_POST['email'];
-$phone = $_POST['phone'];
+$restaurantName = $_GET['restaurantName'];
 $date = $_POST['date'];
 $time = $_POST['time'];
 $guests = $_POST['guests'];
+$name2 = $_SESSION['Name1'];
 
+$sql = "SELECT * FROM reg WHERE Name1 = ? ";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $name2); // "s" indicates a string parameter
+$stmt->execute();
+
+// Get the result
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $email = $row["email"];
+        $mobile = $row["MobileNo"];
+    }
+}
 // Prepare and execute the SQL query to insert data
 $sql = "INSERT INTO reservations (restaurant_name, Name1, email, phone, booking_date, booking_time, num_of_guests) 
         VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssssi", $restaurantName, $name, $email, $phone, $date, $time, $guests);
+$stmt->bind_param("ssssssi", $restaurantName, $name2, $email, $mobile, $date, $time, $guests);
 
 if ($stmt->execute()) {
     echo "<script>alert('Reservation successfully saved in the database.')</script>";

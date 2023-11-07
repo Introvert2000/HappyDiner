@@ -1,3 +1,8 @@
+<?php
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -154,14 +159,18 @@
         }
 
         // SQL query to retrieve reservations
-        $sql = "SELECT * FROM reservations";
-        $result = $conn->query($sql);
+        $restaurant_name2 = $_SESSION['restaurant_name'];
+        $sql = "SELECT * FROM reservations WHERE restaurant_name = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $restaurant_name2);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo '<div class="reservation-card">';
                 echo '<h2>Reservation ID: ' . $row['booking_id'] . '</h2>';
-                echo '<p>Customer Name: ' . $row['Name1'] . '</p>';
+                echo '<p>Customer Name: ' . $row['name'] . '</p>';
                 echo '<p>Reservation Date: ' . $row['booking_date'] . '</p>';
                 echo '<p>Status: ' . $row['status'] . '</p>';
                 echo '<button class="view-details-button" data-reservation-id="' . $row['booking_id'] . '">View Details</button>';
