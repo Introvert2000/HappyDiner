@@ -4,7 +4,7 @@ require_once 'connection.php';
 
 
 
-    $select_query = mysqli_query($connection,"SELECT * FROM restaurant ");
+    $select_query = mysqli_query($connection,"SELECT * FROM restaurant WHERE status = 'Approved' ");
 
 
 ?>

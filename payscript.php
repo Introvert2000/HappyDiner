@@ -34,13 +34,13 @@ if ($stmt) {
 ; // Replace with actual customer email
 $orderDate = date("Y-m-d"); // Current date
 $orderTime = date("H:i:s"); // Current time
-$totalAmount = $_POST['totalAmount']; // Get the total amount from the form
+$totalAmount = $_SESSION['totalAmount']; // Get the total amount from the form
 
 // Other order information (you can modify as needed)
 $status = "Pending";
 $specialInstructions = "No special instructions"; // Modify as needed
-if(isset($_POST['restaurantName'])){
-    $restaurantName = $_POST['restaurantName'];
+if(isset($_SESSION['restaurantName'])){
+    $restaurantName = $_SESSION['restaurantName'];
     // Now, you have the $restaurantName available for use in payscript.php
 }
 
@@ -60,7 +60,7 @@ if ($conn->query($sql) === TRUE) {
     // Now, you have the order ID that you can use to associate order items
 
     // Loop through the cart items and add them to the "order_item" table
-    $cartItems = json_decode($_POST['cartItems'], true); // Assuming you're passing cart items as JSON
+    $cartItems = $_SESSION['cartItems'];
     foreach ($cartItems as $cartItem) {
         $itemName = $cartItem['name'];
         $itemPrice = $cartItem['price'];
@@ -74,7 +74,9 @@ if ($conn->query($sql) === TRUE) {
         }
     }
 
-    echo "Order placed successfully! Order ID: " . $orderID;
+    echo '<script>alert("Order placed successfully! Order ID: ' . $orderID . '");</script>';
+    header('Location: order_details.php?orderID=' . $orderID);
+
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

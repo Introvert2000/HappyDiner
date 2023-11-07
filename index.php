@@ -5,13 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product</title>
+<<<<<<< HEAD
     ?
+=======
+
+>>>>>>> cdd562ec9630b77e57dbe6f81fde18fb44c35017
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="dropdown.css">
 
 </head>
 
 <body>
+<<<<<<< HEAD
     <header>
         <nav>
             <div class="container">
@@ -29,6 +34,31 @@
                     session_start();
                     if (empty($_SESSION['Name1'])) {
                         ?>
+=======
+<header>
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <a href="#">Happy Diner</a>
+            </div>
+            <div class="search-bar">
+                <form action='search3.php' method="POST">
+                    <input  type="text" name="query" placeholder="Search products">
+                    <button type="submit" class="search-button">Search</button>
+                </form>
+            </div>
+            <div class="menu">
+                <?php
+                session_start();
+                if (empty($_SESSION['Name1'])) {
+                ?>
+                    <ul>
+                        <li><a href="login.php">Login</a></li>
+                        <li><a href="register.php">Register</a></li>
+                    </ul>
+                <?php } else { ?>
+                    <div class="dropdown">
+>>>>>>> cdd562ec9630b77e57dbe6f81fde18fb44c35017
                         <ul>
                             <li><a href="login.php">Login</a></li>
                             <li><a href="register.php">Register</a></li>
@@ -56,6 +86,7 @@
 
     <main>
         <!-- Add a search form -->
+<<<<<<< HEAD
 
 
         <?php
@@ -143,9 +174,13 @@
             $result = $stmt->get_result();
 
 
+=======
+        
+        
+           
+>>>>>>> cdd562ec9630b77e57dbe6f81fde18fb44c35017
 
-            if ($result->num_rows > 0) {
-                echo '
+          
                 <div class="card">
                 <div class="image">
                     <img src="Picture/Order_Food.avif" />
@@ -163,15 +198,7 @@
                     <!-- Add any relevant content for this card -->
                 </div>
                 <button class="book-button" id="get-location-book">Book</button>
-            </div>';
-            } else {
-                echo "No products found in the database.";
-            }
-        }
-
-        // Close the database connection
-        $conn->close();
-        ?>
+            </div>
     </main>
 
     <script>
