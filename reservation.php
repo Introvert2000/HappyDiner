@@ -140,6 +140,7 @@
     <h1>Reservation List</h1>
     <div class="container">
         <?php
+        session_start();
         // Database connection parameters
         $servername = "localhost";
         $username = "root";
@@ -154,10 +155,21 @@
         }
 
         // SQL query to retrieve reservations
-        $sql = "SELECT * FROM reservations";
-        $result = $conn->query($sql);
+        $restaurantName = $_SESSION['restaurant_name'];
+     $sql = "SELECT * FROM reservations WHERE restaurant_name = ?";
 
-        if ($result->num_rows > 0) {
+                // Use prepared statements to avoid SQL injection
+                $stmt = $conn->prepare($sql);
+
+                // Bind the parameter to the placeholder
+                $stmt->bind_param("s", $restaurantName);
+
+                // Execute the query
+                $stmt->execute();
+
+                // Get the result set
+                $result = $stmt->get_result();
+                {
             while ($row = $result->fetch_assoc()) {
                 echo '<div class="reservation-card">';
                 echo '<h2>Reservation ID: ' . $row['booking_id'] . '</h2>';
