@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="dropdown.css">
     
 </head>
-<body>
 <header>
     <nav>
         <div class="container">
@@ -51,14 +50,13 @@
         </div>
     </nav>
 </header>
-
+<body>
+<div class="space" >
+    <h1>Happy Diner</h1>
+             <!-- <img class="img-des" src="main.jpeg" > -->
+        </div>
     <main>
-        <!-- Add a search form -->
         
-        
-           
-
-          
                 <div class="card">
                 <div class="image">
                     <img src="Picture/Order_Food.avif" />
@@ -124,5 +122,27 @@
     }
 
 </script>
+<div class="abt" >
+<h1>About us</h1>
+    <p class="tag" >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo, perspiciatis! A assumenda dicta harum quasi dolorem praesentium minus, tempora ipsa quo consequuntur quibusdam nam culpa placeat? Odio obcaecati dolor recusandae!</p>
+</div>
 </body>
+<footer class="food-footer">
+        <div class="container">
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p>For Reservations and Inquiries:</p>
+                <ul>
+                    <li><a href="tel:+1234567890">Phone: +91 9370568242</a></li>
+                    <li><a href="tel:+9876543210">Phone: +9 (876) 543-210</a></li>
+                </ul>
+            </div>
+            <div class="footer-review">
+                <h3>Customer Reviews</h3>
+                <p>Have you dined with us? Share your experience and read what others have to say.</p>
+                <a class="btn-review" href="add_review.php" >Write a Review</a>
+                <a class="btn-review" href="reviews.php" >View Reviews</a>
+            </div>
+        </div>
+    </footer>
 </html>

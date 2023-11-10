@@ -56,7 +56,7 @@
         $giveDate  = $_POST['date'];
 
         // Insert the review into the database
-        $sql = "INSERT INTO reviews (restaurant_name, customer_username, stars, review_discription, date1) VALUES ('$restaurantName', '$reviewerName', '$rating', '$reviewText',' $giveDate ')";
+        $sql = "INSERT INTO restaurant_reviews (restaurant_name, customer_username, stars, review_description, date1) VALUES ('$restaurantName', '$reviewerName', '$rating', '$reviewText',' $giveDate ')";
 
         if ($conn->query($sql) === TRUE) {
             echo "Review added successfully!";

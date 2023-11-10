@@ -11,11 +11,14 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+
 // Get data from the form
-$restaurantName = $_GET['restaurantName'];
+$restaurantName = $_POST['restaurantName'];
 $date = $_POST['date'];
 $time = $_POST['time'];
 $guests = $_POST['guests'];
+
+
 $name2 = $_SESSION['Name1'];
 
 $sql = "SELECT * FROM reg WHERE Name1 = ? ";
@@ -33,7 +36,7 @@ if ($result->num_rows > 0) {
     }
 }
 // Prepare and execute the SQL query to insert data
-$sql = "INSERT INTO reservations (restaurant_name, Name1, email, phone, booking_date, booking_time, num_of_guests) 
+$sql = "INSERT INTO reservations (restaurant_name, name, email, phone, booking_date, booking_time, num_of_guests) 
         VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);

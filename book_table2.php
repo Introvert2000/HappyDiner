@@ -182,8 +182,14 @@
 
 
             <div class="section-2">
-                <form action="process_reservation.php" method="post" id="reservationForm" >
-                    <p>Table reservation</p>
+            <form id="reservationForm" action="process_reservation.php" method="post">
+                        <?php
+                            $restaurantName = $_GET['restaurantName'];
+
+                        ?>
+            <input type="hidden" name="restaurantName" value="<?php echo $restaurantName; ?>">
+        
+            <p>Table reservation</p>
                     <div>
                         <label for="reservationDate">Select Date: </label>
                         <input type="date" id="reservationDate" name= "date" min="<?php echo date('Y-m-d'); ?>">
@@ -235,30 +241,24 @@
                             customTimeInput.style.display = 'block';
                         }
                     </script>
-                    <script>
-    function bookTable() {
+
+<div>
+                    <button id="bookButton" type="button" onclick="bookTable()">Book</button>
+</div>
+                        <script>
+         function bookTable() {
         // Check if the user is logged in (you can use a variable like 'loggedIn' to track this)
         // If the user is not logged in, display an alert
-        <?php if (empty($_SESSION['Name1'])): ?>
+        <?php if (empty($_SESSION['Name1'])) : ?>
             alert("Please log in to make a reservation.");
-        <?php else: ?>
-            // If the user is logged in, construct the URL with the restaurant name and redirect to process_reservation.php
-            const restaurantName = "<?php echo $restaurantName; ?>"; // Get the restaurant name from PHP
-            const reservationDate = document.getElementById('reservationDate').value; // Get the reservation date
-            const guestCount = document.getElementById('guestCount').value; // Get the guest count
-
-            // Construct the URL with the query parameters
-            const url = `process_reservation.php?restaurantName=${restaurantName}&reservationDate=${reservationDate}&guestCount=${guestCount}`;
-
-            // Redirect to process_reservation.php with the query parameters
-            window.location.href = url;
+        <?php else : ?>
+            // If the user is logged in, you can perform other actions or submit the form.
+            // For example, you can submit the form using JavaScript.
+            // Replace 'reservationForm' with the ID of your form.
+            document.getElementById('reservationForm').submit();
         <?php endif; ?>
     }
-</script>
-
-                    <div>
-    <button type="button" id="submit_to_rest" onclick="bookTable()">Book Table</button>
-</div>
+    </script>
 
                 </form>
                 <!-- 

@@ -31,7 +31,7 @@ session_start();
                 </div>
        <div class="remember-forgot">
         <label >
-       <input type="checkbox" onclick="myFunction()">Show Password
+       <!-- <input type="checkbox" onclick="myFunction()">Show Password -->
        </label>
        </div>
 
@@ -50,7 +50,7 @@ session_start();
   <input type="checkbox">
     Remember me
   </label>
-  <a href="forget.php">Forgot password?</a>
+  <!-- <a href="forget.php">Forgot password?</a> -->
  </div>
  
   <input type="submit" id="Submit" name="Submit" value="Login" class="btn btn-success" />
