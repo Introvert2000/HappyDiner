@@ -51,19 +51,18 @@
     </nav>
 </header>
 <body>
+<div class="bg-image" style="background-image: url('newmain.avif')">
 <div class="space" >
     <h1>Happy Diner</h1>
              <!-- <img class="img-des" src="main.jpeg" > -->
         </div>
     <main>
-        
+
                 <div class="card">
                 <div class="image">
                     <img src="Picture/Order_Food.avif" />
                 </div>
-                <div class="caption">
-                    <!-- Add any relevant content for this card -->
-                </div>
+                
                 <button class="order-button" id="get-location-order">Order</button>
             </div>
             <div class="card">
@@ -122,11 +121,12 @@
     }
 
 </script>
+
+</body>
 <div class="abt" >
 <h3>About us</h3>
     <p class="tag" >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo, perspiciatis! A assumenda dicta harum quasi dolorem praesentium minus, tempora ipsa quo consequuntur quibusdam nam culpa placeat? Odio obcaecati dolor recusandae!</p>
 </div>
-</body>
 <footer class="food-footer">
         <div class="container">
             <div class="footer-contact">

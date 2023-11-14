@@ -16,13 +16,10 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
+
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -54,6 +51,7 @@ nav {
 .menu ul {
     list-style: none;
     display: flex;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .menu li {
@@ -92,24 +90,37 @@ html{
 main{
     max-width: 600px;
     max-height: fit-content;
-    margin: 30px auto;
+    margin:     ;
     display: flex ;
     column-span: all;
     justify-content: space-between;
-    margin: auto;   
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+.bg-image{
+    width: 99vw; 
+    height: 80vh; 
+    background-position: center; 
+    background-size: cover; 
+    overflow-x: hidden;
 }
 
 .space{
     display: flex;
     justify-content: center;
     align-items: center;
-   max-width: 1500px;
-    height: 300px;
-    background-image: url("./newmain.avif");
+    max-width: 1500px;
+
+    
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
     text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     /* font-weight: 200px; */
     font-size: xx-large;
     color: #bb732b;
@@ -122,36 +133,31 @@ main{
 }
 
 main .card{
-    width: 200px;
-    height: 200px;
-    flex: 300px;
-    text-align: center;
-    border: 8px solid lightgray;
-    padding: 10px;
-    margin: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px;
+    width: 300px; /* Adjust the width as needed */
+    transition: transform 0.3s ease-in-out;
 
 }
-
+.card:hover {
+    transform: scale(1.05);
+}
 
 main .card .image {
     height: 50%;
-    margin-bottom:20px;
 
 }
 
 main .card .image img{
-    height: 200%;
     width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
     /* border-radius: 5%; */
     object-fit: cover;
 }
 
-main .card .caption{
-    padding-left: 1em;
-    text-align: left;
-    line-height: 3em;
-    height: 25%;
-}
 
 
 
@@ -226,7 +232,7 @@ main .card .caption{
 }
 
 /* Style for the "Order" button */
-.order-button {
+/* .order-button {
     background-color: #28a745;
     color: #fff;
     border: none;
@@ -241,7 +247,7 @@ main .card .caption{
     margin: 10px;   
 }
 
-/* Style for the "Book" button */
+
 .book-button {
     background-color: #ffc107;
     color: #333;
@@ -250,25 +256,48 @@ main .card .caption{
     cursor: pointer;
     padding: 10px 20px;
     font-weight: bold;
+} */
+
+.order-button,
+.book-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    font-size: large;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
 }
 
+.order-button:hover,
 .book-button:hover {
     background-color: #d39e00;
 }
 
+
 .abt{
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: xx-large;
     color: #bb732b;
+    background-color: whitesmoke;
 }
 .tag{
     font-size: 2rem;
-    color: #100902;  
+    margin: 0;
+    padding: 10px;
+    color: gray;  
 }
 
 /* Style for the footer section */
 .food-footer {
     background-color: #f4f4f4;
     padding: 30px 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 /* Style for the footer container */
@@ -320,6 +349,7 @@ main .card .caption{
 .footer-review p {
     font-size: 14px;
     margin-bottom: 10px;
+    text-decoration: none;
 }
 
 .btn-review {
@@ -332,6 +362,7 @@ main .card .caption{
     transition: background-color 0.3s;
     font-size: 16px;
     margin-right: 10px;
+    text-decoration: none;
 }
 
 .btn-review:hover {
