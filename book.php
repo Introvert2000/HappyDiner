@@ -1,7 +1,6 @@
 <?php
 
 require_once 'connection.php';
-session_start();
 
 
 
@@ -33,6 +32,7 @@ session_start();
                 
                 <div class="menu">
                    <?php
+                   session_start();
                    if(empty($_SESSION['Name1']))
                    {
                    
@@ -80,18 +80,19 @@ session_start();
          <div class="caption">
             <?php 
             $restaurantName=$row['restaurant_name'];
-            
+            $rating = $row['restauant_rating'];
+            $price = $row['recommen_price'];
             $_SESSION['restaurant']=$restaurantName;
             ?>
                 <div>
-                   <p class="product_name"><?php echo $restaurantName; ?></p>
+                <p class="product_name"><?php echo $restaurantName; ?></p>
                 </div>
                 <div class="mainart">
-                        <p class="price">$20</p>
-                    <div class="revi">
-                        <p class="price">3</p>
-                        <img class="star" src="star-svgrepo-com.svg" alt="">
-                    </div>  
+                <p class="price"><?php echo $rating ?></p>
+                <div class="revi">
+                <p class="price"><?php echo $price ?></p>
+                <img class="star" src="star-svgrepo-com.svg" alt="">
+                </div>
                 </div>
             <button type="button" id="button_colour" onclick="displaySelectedOption(`<?php echo $restaurantName; ?>`)">Book</button>
             <script>

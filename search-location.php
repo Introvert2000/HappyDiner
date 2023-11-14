@@ -18,6 +18,12 @@
         }
 
         /* Add this to your CSS file (search3.css or index.css) */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .search-bar {
             display: flex;
             align-items: center;
@@ -50,6 +56,23 @@
 
         .search-button:hover {
             background-color: #45a049;
+        }
+
+        .result-container {
+            display: flex;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .search-results {
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        .map-container {
+            flex: 1;
+            height: 400px; /* Adjust the height as needed */
+            padding: 0 20px;
         }
     </style>
 </head>
@@ -103,6 +126,7 @@
             <!-- Left section for search results -->
             <div class="search-results">
                 <?php
+
 $dbHost = "localhost";
 $dbUser = "root";
 $dbPassword = "";
@@ -119,7 +143,7 @@ if ($conn->connect_error) {
 // Check if a search query is provided
 if (isset($_POST["query"])) {
     $query = $_POST["query"];
-    $_SESSION['place'] = $query;
+    $_SESSION["place"] = $query;
     // Modify your database query to search for products based on the query
     $stmt = $conn->prepare("SELECT * FROM restaurant WHERE city LIKE ?");
     $searchQuery = "%" . $query . "%";
@@ -129,14 +153,12 @@ if (isset($_POST["query"])) {
 
     // Display search results
     if ($result->num_rows > 0) {
-        $markers = []; // Array to store marker coordinates and restaurant IDs
 
         while ($row = $result->fetch_assoc()) {
             $id = $row["restaurant_id"];
-            $latitude = $row["latitude"];
-            $longitude = $row["longitude"];
+            // $latitude = $row["latitude"];
+            // $longitude = $row["longitude"];
             $restaurantName = $row["restaurant_name"];
-            $markers[] = ["restaurant_id" => $id, "coordinates" => [$latitude, $longitude], "restaurant_info" => $restaurantName];
             ?>
     
             <div class="card2">
@@ -168,7 +190,8 @@ if (isset($_POST["query"])) {
     } else {
         echo "No results found for: " . htmlspecialchars($query);
     }
-}                ?>
+}                
+ ?>
             </div>
 
             <!-- Right section for the map -->
@@ -176,69 +199,85 @@ if (isset($_POST["query"])) {
                 <div id="map"></div>
             </div>
         </div>
+
         <?php
-        // Database configuration
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "login";
+
+// Create a connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check the connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+$query = $_SESSION["place"];
+$stmt = $conn->prepare("SELECT * FROM restaurant WHERE city LIKE ?");
+    $searchQuery = "%" . $query . "%";
+    $stmt->bind_param("s", $searchQuery);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $markers = []; // Array to store marker coordinates and restaurant IDs
+
+    // Display search results
+    if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $id = $row["restaurant_name"];
+        $latitude = $row["latitude"];
+        $longitude = $row["longitude"];
+        $markers[] = ["restaurant_id" => $id, "coordinates" => [$latitude, $longitude],"restaurantName" =>$id];
+    }
+
+    // Close the database connection
+      ?>
         
-        ?>
-
-
-        
-
         <script>
-            // Create a map with a default view
-            var map = L.map("map").setView([<?php echo $markers[0]["coordinates"][0]; ?>, <?php echo $markers[0]["coordinates"][1]; ?>], 12);
+  var map = L.map("map").setView([<?php echo $markers[0]["coordinates"][0]; ?>, <?php echo $markers[0]["coordinates"][1]; ?>], 12);
 
-            // Add a tile layer to the map (you can use different map tile providers)
-            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-                maxZoom: 19,
-            }).addTo(map);
+// Add a tile layer to the map (you can use different map tile providers)
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+}).addTo(map);
 
-            // Add markers for each restaurant location
-            <?php
-            foreach ($markers as $marker) {
-                echo "var restaurantMarker = L.marker([" . $marker["coordinates"][0] . ", " . $marker["coordinates"][1] . "]).addTo(map);\n";
-                // Add a tooltip with information for each restaurant
-                echo "restaurantMarker.bindTooltip('<p>" . $marker["restaurant_info"] . "</p>').openTooltip();\n";
-                // Add a click event to open a new PHP page
-                echo "restaurantMarker.on('click', function() { window.location.href = 'restaurant_details.php?id=" . $marker["restaurant_id"] . "'; });\n";
-            }
-            ?>
+// Add markers for each restaurant location
+<?php
+foreach ($markers as $marker) {
+    echo "var restaurantMarker = L.marker([" . $marker["coordinates"][0] . ", " . $marker["coordinates"][1] . "]).addTo(map);\n";
+    // Add a tooltip with information for each restaurant
+    echo "restaurantMarker.bindTooltip('<p>" . $marker["restaurantName"] . "</p>').openTooltip();\n";
+    // Add a click event to open a new PHP page
+    echo "restaurantMarker.on('click', function() { window.location.href = 'book_table.php?restaurantName=" . $marker["restaurant_id"] . "'; });\n";
+}
+?>
 
-            // Add a marker for the user's current location (if available)
-            var userMarkerIcon = L.divIcon({
-                className: 'user-marker',
-                iconSize: [25, 41],
-                iconAnchor: [12, 41],
-                popupAnchor: [1, -34],
-                html: '<div class="user-marker-icon"></div>'
-            });
+// Add a marker for the user's current location (if available)
+var userMarkerIcon = L.divIcon({
+    className: 'user-marker',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    html: '<div class="user-marker-icon"></div>'
+});
 
-            if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    var userLatitude = position.coords.latitude;
-                    var userLongitude = position.coords.longitude;
-                    var userMarker = L.marker([userLatitude, userLongitude], { icon: userMarkerIcon }).addTo(map);
-                    // Add a tooltip for the user's marker
-                    userMarker.bindTooltip('<p>Your Location</p><p>Latitude: ' + userLatitude + '</p><p>Longitude: ' + userLongitude + '</p>').openTooltip();
-                });
-            } else {
-                console.log("Geolocation is not available in this browser.");
-            }
-        </script>
+if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+        var userLatitude = position.coords.latitude;
+        var userLongitude = position.coords.longitude;
+        var userMarker = L.marker([userLatitude, userLongitude], { icon: userMarkerIcon }).addTo(map);
+        // Add a tooltip for the user's marker
+        userMarker.bindTooltip('<p>Your Location</p><p>Latitude: ' + userLatitude + '</p><p>Longitude: ' + userLongitude + '</p>').openTooltip();
+    });
+} else {
+    console.log("Geolocation is not available in this browser.");
+}
+</script>
 
-        <style>
-            /* Define CSS for the custom marker icon */
-            .user-marker {
-                width: 25px;
-                height: 41px;
-            }
-
-            .user-marker-icon {
-                width: 100%;
-                height: 100%;
-                border-radius: 50%;
-            }
-        </style>
+<?php 
+    $conn->close();
+}  
+?>
     </main>
 </body>
 
