@@ -51,24 +51,7 @@
 
 }
 </style>
-<script>
-        function search() {
-            var query = document.getElementById("searchInput").value;
-            if (query.trim() !== "") {
-                // Perform an AJAX request to fetch search results
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function () {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        document.getElementById("searchResults").innerHTML = xmlhttp.responseText;
-                    }
-                };
-                xmlhttp.open("GET", "search.php?query=" + query, true);
-                xmlhttp.send();
-            } else {
-                document.getElementById("searchResults").innerHTML = "Please enter a search query.";
-            }
-        }
-    </script>
+
 </head>
 
 
@@ -136,7 +119,25 @@
      </div>
      <div id="searchResults"></div>     
 </main>
-
+<script>
+    function search() {
+        var query = document.getElementById("searchInput").value;
+        if (query.trim() !== "") {
+            // Perform an AJAX request to fetch search results
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    // Instead of updating "searchResults", redirect to display.php
+                    window.location.href = "display.php?query=" + query;
+                }
+            };
+            xmlhttp.open("GET", "display.php?query=" + query, true); // Send the query to display.php
+            xmlhttp.send();
+        } else {
+            document.getElementById("searchResults").innerHTML = "Please enter a search query.";
+        }
+    }
+</script>
 </body>
 </html>
 

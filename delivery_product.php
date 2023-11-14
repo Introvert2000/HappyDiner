@@ -1,208 +1,240 @@
-<?php
-$server = "localhost";
-$username = "root";
-$password = "";
-$database = "login";
-$connection = mysqli_connect("$server","$username","$password");
-$select_db = mysqli_select_db($connection, $database);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Details</title>
-    <link rel="stylesheet" href="styles.css">
-
-    <style>
-        /* Basic CSS for styling */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-
-        .restaurant {
-            max-width: 800px;
-            margin: 20px auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            border-radius: 5px;
-        }
-
-        .restaurant img {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 10px;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        p {
-            color: #777;
-        }
-
-        /* Styles for the menu */
-        .menu-item {
-            display: flex;
-            align-items: center; /* Vertically align items */
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-        }
-
-        /* Style for the Order button */
-        .order-button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-
-        /* Style for the item image */
-        .item-image {
-            max-width: 100px; /* Adjust the width as needed */
-            margin-right: 20px; /* Spacing between image and text */
-            height: 130px;
-            width:130px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css"> <!-- Include your stylesheet -->
+    <link rel="stylesheet" href="delivery_product.css">
+    <link rel="stylesheet" href="dropdown.css">
 </head>
 <body>
 <header>
-        <nav>
-            <div class="container">
-                <div class="logo">
-                    <a href="home.php">Happy Diner</a>
-                </div>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search...">
-                   
-                </div>
-                <input type="submit" name="submit" value="Search">
-
-                <div class="menu">
-                   <?php
-                   session_start();
-                   if(empty($_SESSION['Name1']))
-                   {
-                   
-                   ?>
-                    <ul>
-                        <li><a href="login.php">Login</a></li>
-                        <li><a href="register.php">Register</a></li>
-                    </ul>
-                    <?php }
-                    else{
-                        ?>
-
-                        <ul>
-                        <li id="username"> <a><?php if(!empty($_SESSION['Name1'])){ echo $_SESSION['Name1']; }?></a> </li>
-                        </ul>
-                        
-                        <?php
-                    }
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <a href="index.php">Happy Diner</a>
+            </div>            
+            
+            <div class="menu">
+               <?php
+               session_start();
+               if(empty($_SESSION['Name1']))
+               {
+               ?>
+                <ul>
+                    <li><a href="login.php">Login</a></li>
+                    <li><a href="register.php">Register</a></li>
+                </ul>
+                <?php }
+                else{
                     ?>
-                </div>
+                    <div class="dropdown">
+                        <ul>
+                            <li id="username"><a>
+                                <?php if (!empty($_SESSION['Name1'])) {
+                                    echo $_SESSION['Name1'];
+                                } ?>
+                            </a></li>
+                        </ul>
+                        <button class="dropdown-button">&#9660;</button>
+                        <div class="dropdown-content">
+                            <a href="dashboard.php">Dashboard</a>
+                            <a href="logout.php">Logout</a>
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
             </div>
-        </nav>
+        </div>
+    </nav>
 </header>
-    
-    
-<?php
 
+<?php
 require_once 'connect_rest.php';
 $restaurantName = $_GET['restaurantName'];
-
-$select_query = mysqli_query($connection,"SELECT * FROM `$restaurantName`");
-
-
-
+$_SESSION['delivery_restaurant']=$restaurantName;
+$select_query = mysqli_query($connection, "SELECT * FROM `$restaurantName`");
 ?>
-   
-    <div class="restaurant">
+
+<div class="restaurant">
     <h2><?php echo $restaurantName; ?></h2>
-     <p>Restaurant Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, odio ac vehicula mattis, dolor tortor varius lectus, vel fermentum odio mi in dui.</p>
-        <p>Location: Restaurant Address, City, Country</p>
-        <img src="restaurant-image.jpg" alt="Restaurant Image">
 
-        <h2>Menu</h2>
+    <h2>Menu</h2>
 
-        
-        <?php
-        while($row = mysqli_fetch_assoc($select_query)){
-
+    <?php
+    while ($row = mysqli_fetch_assoc($select_query)) {
     ?>
         <div class="menu-item">
-        
-            <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" alt="Item 1 Image" class="item-image"/>
+            <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" alt="Item 1 Image" class="item-image" />
             <div>
                 <h3><?php echo $row["food_item"]; ?></h3>
-                
                 <p><?php echo $row["price"]; ?></p>
                 <button class="order-button" data-name="<?php echo $row["food_item"]; ?>" data-price="<?php echo $row["price"]; ?>">Order</button>
             </div>
         </div>
-
-        <?php
-}
-     ?>
-     <div id="cart">
+    <?php
+    }
+    ?>
+    <div id="cart">
         <h2>Cart</h2>
         <ul id="cart-items">
             <!-- Cart items will be added here dynamically -->
         </ul>
         <p>Total: $<span id="cart-total">0</span></p>
+        <button id="proceed-to-checkout">Proceed to Checkout</button>
     </div>
-        <!-- Add more menu items as needed -->
+</div>
+
+<!-- Modal for Order Confirmation -->
+<div id="orderConfirmationModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeOrderModal">&times;</span>
+        <h2>Order Confirmation</h2>
+        <div id="orderSummary">
+                <!-- Order summary will be displayed here dynamically -->
+        </div>
+        <p>Are you sure you want to proceed with your order?</p>
+        <button id="confirmOrderButton">Confirm Order</button>
     </div>
-    <script>
-        // JavaScript code for cart functionality
-        const cartItems = [];
-        let total = 0;
+</div>
 
-        // Add event listeners to all "Order" buttons
-        const orderButtons = document.querySelectorAll(".order-button");
-        orderButtons.forEach(button => {
-            button.addEventListener("click", addToCart);
-        });
+<script>
+    const cartItems = [];
+    let total = 0;
+    const proceedToCheckoutButton = document.getElementById("proceed-to-checkout");
+        proceedToCheckoutButton.addEventListener("click", function () {
+            // Check if the user is logged in
+            const isUserLoggedIn = <?php echo empty($_SESSION['Name1']) ? 'false' : 'true'; ?>;
+            
+            if (isUserLoggedIn) {
+                // Redirect to the payment.php page if logged in
+                proceedToCheckoutButton.addEventListener("click", openOrderConfirmationModal);
 
-        function addToCart(event) {
-            const itemName = event.target.getAttribute("data-name");
-            const itemPrice = parseFloat(event.target.getAttribute("data-price"));
+        // Get the order confirmation modal and buttons
+        const orderConfirmationModal = document.getElementById("orderConfirmationModal");
+        const closeOrderModalButton = document.getElementById("closeOrderModal");
+        const confirmOrderButton = document.getElementById("confirmOrderButton");
 
-            cartItems.push({ name: itemName, price: itemPrice });
-            total += itemPrice;
-
-            // Update the cart display
-            updateCartDisplay();
+        function openOrderConfirmationModal() {
+            orderConfirmationModal.style.display = "block";
         }
 
-        function updateCartDisplay() {
-            const cartList = document.getElementById("cart-items");
-            const cartTotal = document.getElementById("cart-total");
+        closeOrderModalButton.addEventListener("click", closeOrderConfirmationModal);
+        confirmOrderButton.addEventListener("click", proceedToCheckout);
 
-            // Clear existing cart items
-            cartList.innerHTML = "";
+        function closeOrderConfirmationModal() {
+            orderConfirmationModal.style.display = "none";
+        }
 
-            // Add updated cart items
+        function proceedToCheckout() {
+            // Redirect to the payment.php page
+            const restaurantName = "<?php echo $restaurantName; ?>";
+        window.location.href = `payment.php?restaurantName=${restaurantName}`;
+        }
+
+        function openOrderConfirmationModal() {
+            // Clear previous order summary
+            document.getElementById("orderSummary").innerHTML = "";
+
+            // Populate order summary
             cartItems.forEach(item => {
-                const listItem = document.createElement("li");
-                listItem.textContent = `${item.name} - $${item.price}`;
-                cartList.appendChild(listItem);
+                const orderSummaryItem = document.createElement("div");
+                orderSummaryItem.textContent = `${item.name} - $${item.price}`;
+                document.getElementById("orderSummary").appendChild(orderSummaryItem);
             });
 
-            // Update the total
-            cartTotal.textContent = total.toFixed(2); // Display total with two decimal places
+            orderConfirmationModal.style.display = "block";
         }
-    </script>
+            } else {
+                // Display an alert if the user is not logged in
+                alert("Please log in before proceeding to checkout.");
+            }
+        });
+
+    // JavaScript code for cart functionality
+
+    // Add event listeners to all "Order" buttons
+    const orderButtons = document.querySelectorAll(".order-button");
+    orderButtons.forEach(button => {
+        button.addEventListener("click", addToCart);
+    });
+
+    // Add event listener for "Proceed to Checkout" button
+    // const proceedToCheckoutButton = document.getElementById("proceed-to-checkout");
+    
+
+    function addToCart(event) {
+        const itemName = event.target.getAttribute("data-name");
+        const itemPrice = parseFloat(event.target.getAttribute("data-price"));
+
+        cartItems.push({ name: itemName, price: itemPrice });
+        total += itemPrice;
+
+        // Update the cart display
+        updateCartDisplay();
+
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+    }
+
+    function updateCartDisplay() {
+        const cartList = document.getElementById("cart-items");
+        const cartTotal = document.getElementById("cart-total");
+
+        // Clear existing cart items
+        cartList.innerHTML = "";
+
+        // Add updated cart items
+        cartItems.forEach(item => {
+            const listItem = document.createElement("li");
+            listItem.textContent = `${item.name} - $${item.price}`;
+            cartList.appendChild(listItem);
+        });
+
+        // Update the total
+        cartTotal.textContent = total.toFixed(2); // Display total with two decimal places
+    }
+
+    
+
+        
+</script>
+
+<style>
+    /* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    text-align: center;
+}
+
+.close {
+    float: right;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.close:hover {
+    color: red;
+}
+
+</style>
 </body>
 </html>
