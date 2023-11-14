@@ -44,8 +44,12 @@ if ($checkStmt->execute()) {
         $insertStmt->bind_param("ddsss", $latitude, $longitude, $location, $address, $username);
 
         if ($insertStmt->execute()) {
-            echo "Data inserted into the database successfully";
-        } else {
+            echo '<script>';
+            echo 'alert("Data inserted into the database successfully");';
+            echo 'window.location.href = "index.php";';
+            echo '</script>';
+                    }
+        else {
             echo "Error: " . $insertSql . "<br>" . $conn->error;
         }
     }

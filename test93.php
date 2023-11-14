@@ -17,12 +17,7 @@
                 <div class="logo">
                     <a href="index.php">Happy Diner</a>
                 </div>
-                <div class="search-bar">
-                    <form action='search3.php' method="POST">
-                        <input type="text" name="query" placeholder="Search products">
-                        <button type="submit" class="search-button">Search</button>
-                    </form>
-                </div>
+                
                 <div class="menu">
                     <?php
                     session_start();
@@ -55,7 +50,50 @@
 
 
     <main>
+    <div class="search-bar">
+                    <form action='test93.php' method="POST">
+                        <input type="text" name="query" placeholder="Search products">
+                        <button type="submit" class="search-button">Search</button>
+                    </form>
+                </div>
+                <style>
+                    /* Add this to your CSS file (search3.css or index.css) */
 
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.search-bar form {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 300px;
+    font-size: 16px;
+}
+
+.search-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.search-button:hover {
+    background-color: #45a049;
+}
+
+                </style>
         <?php
         // Database configuration
         $dbHost = "localhost";
