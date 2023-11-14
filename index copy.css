@@ -1,0 +1,344 @@
+/* *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: black;
+}
+
+/* Apply basic styles to the header and navigation */
+header {
+    background-color: #333;
+    color: #fff;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Style the logo */
+.logo a {
+    text-decoration: none;
+    color: #bb732b;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Style the search bar */
+.search-bar {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.search-bar input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 50%;
+}
+
+/* Style the menu items */
+.menu ul {
+    list-style: none;
+    display: flex;
+}
+
+.menu li {
+    margin-right: 20px;
+    color: black;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+}
+
+/* Media query for mobile devices */
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .menu {
+        justify-content: flex-end;
+    }
+
+    .menu ul {
+        margin-top: 10px;
+    }
+
+    .search-bar {
+        margin-top: 10px;
+    }
+}
+html{
+    font-size: 62.5%;
+}
+main{
+    max-width: 600px;
+    max-height: fit-content;
+    margin: 30px auto;
+    display: flex ;
+    column-span: all;
+    justify-content: space-between;
+    margin: auto;   
+}
+
+.space{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   max-width: 1500px;
+    height: 300px;
+    background-image: url("./newmain.avif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    text-align: center;
+    /* font-weight: 200px; */
+    font-size: xx-large;
+    color: #bb732b;
+}
+
+.img-des{
+    width: 1550px;
+    
+    object-fit: contain;
+}
+
+main .card{
+    width: 200px;
+    height: 200px;
+    flex: 300px;
+    text-align: center;
+    border: 8px solid lightgray;
+    padding: 10px;
+    margin: 20px;
+
+}
+
+
+main .card .image {
+    height: 50%;
+    margin-bottom:20px;
+
+}
+
+main .card .image img{
+    height: 200%;
+    width: 100%;
+    /* border-radius: 5%; */
+    object-fit: cover;
+}
+
+main .card .caption{
+    padding-left: 1em;
+    text-align: left;
+    line-height: 3em;
+    height: 25%;
+}
+
+
+
+
+
+
+.custom-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer; /* Change cursor on hover to indicate interactivity */
+    text-align: center; /* Center text horizontally */
+    text-decoration: none; /* Remove underlines for <a> elements */
+  }
+
+  .custom-button:hover {
+    background-color: #0056b3; /* Change background color on hover */
+  }
+
+  .custom-button:active {
+    background-color: #00479e; /* Change background color when clicked */
+  }
+  /* Basic button styles */
+ /* Common button styles */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* Hover effect for all buttons */
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Active state for all buttons */
+.btn:active {
+    background-color: #00479e;
+}
+
+/* Custom button style */
+.custom-button {
+    background-color: #007bff;
+    border-radius: 5px;
+}
+
+/* Search button style */
+/* Style for the search button */
+.search-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+/* Hover effect for the search button */
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+/* Style for the "Order" button */
+.order-button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+.order-button:hover {
+    background-color: #218838;
+}
+
+/* Style for the "Book" button */
+.book-button {
+    background-color: #ffc107;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+.book-button:hover {
+    background-color: #d39e00;
+}
+
+.abt{
+    font-size: xx-large;
+    color: #bb732b;
+}
+.tag{
+    font-size: xx-large;
+    color: #100902;  
+}
+
+/* Style for the footer section */
+.food-footer {
+    background-color: #f4f4f4;
+    padding: 30px 0;
+}
+
+/* Style for the footer container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Style for the contact section */
+.footer-contact {
+    flex: 1;
+    padding: 10px;
+}
+
+.footer-contact h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.footer-contact p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.footer-contact ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-contact li {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+/* Style for the review section */
+.footer-review {
+    flex: 1;
+    padding: 10px;
+}
+
+.footer-review h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.footer-review p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.btn-review {
+    background-color: #bb732b;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.btn-review:hover {
+    background-color: #bb732b;
+}
+
+/* Center the buttons vertically */
+.btn-review {
+    display: inline-block;
+    margin: 0 auto;
+}

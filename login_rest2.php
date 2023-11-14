@@ -1,6 +1,6 @@
 <?php
 $owner_email = $_POST['owner_email'];
-$Password2 = ($_POST['Password2']);
+$restaurant_name = ($_POST['restaurant_name']);
 
 //database connection here
 
@@ -8,35 +8,56 @@ $con = new mysqli('localhost','root','','login');
 if($con->connect_error){
     die('Failed to connect : ' .$con->connect_error);
 } else {
-    $stmt = $con->prepare("SELECT * FROM restaurant WHERE owner_email = ?");
-    $stmt->bind_param("s",$owner_email);
-    $stmt->execute();
-    $stmt_result = $stmt->get_result();
-    if($stmt_result->num_rows > 0){
-        $data = $stmt_result->fetch_assoc();
-        if($data['Password2']===$Password2){
-            $sql = "SELECT restaurant_name FROM restaurant WHERE owner_email = ?";
-            $stmt = $con->prepare($sql);
-            $stmt->bind_param("s", $owner_email); // "s" indicates a string
-            $stmt->execute();
-            $result = $stmt->get_result();
-            
-            // Fetch the data from the result set
-            $row = $result->fetch_assoc();
-            
-            if ($row) {
-                session_start();
-                $_SESSION['restaurant1'] = $row['restaurant_name'];
-                $_SESSION['rest_id']=$row['restaurant_id'];
-                header('location:dashboard_restaurant.php');
-            }
-
-        }
-        else{
-            echo "<h2>Invalid Username or password</h2> ";
-        }
-    }else{
-        echo "<h2>Invalid Username or Password</h2>";
-    }
+    if(isset($_REQUEST['Submit']))
+  {
+    $email = $_REQUEST['owner_email'];
+    $select_query = mysqli_query($con,"select * from reg where email='$email'");
+    $res = mysqli_num_rows($select_query);
+    if($res>0)
+    {
+      $data = mysqli_fetch_array($select_query);
+      $Name1 = $data['Name1'];
+      $_SESSION['Name1'] = $Name1;
+      $otp = rand(10000, 99999);   //Generate OTP
+      include_once("SMTP/class.phpmailer.php");
+      include_once("SMTP/class.smtp.php");
+      $message = '<div>
+      <p><b>Hello!</b></p>
+      <p>You are recieving this email because we recieved a OTP request for your account.</p>
+      <br>
+     <p>Your OTP is: <b>'.$otp.'</b></p>
+     <br>
+     <p>If you did not request OTP, no further action is required.</p>
+    </div>';
+$email = $email; 
+$mail = new PHPMailer;
+$mail->IsSMTP();
+$mail->SMTPAuth = true;                 
+$mail->SMTPSecure = "tls";      
+$mail->Host = 'smtp.gmail.com';
+$mail->Port = 587; 
+$mail->Username = "te9270564@gmail.com"; // Enter your username
+$mail->Password = "tpllzxxdudclesma"; // Enter Password
+$mail->FromName = "HappyDiner";
+$mail->AddAddress($email);
+$mail->Subject = "OTP";
+$mail->isHTML( TRUE );
+$mail->Body =$message;
+if($mail->send())
+{
+  $insert_query = mysqli_query($con,"insert into tbl_otp_check set otp='$otp', is_expired='0'");
+  header('location:otpverify_restaurant.php');
+}
+else
+{
+  $msg = "Email not delivered";
+}
+}
+else
+{
+  $msg = "Invalid Email";
+}
+$conn->close();
+}
 }
 ?>

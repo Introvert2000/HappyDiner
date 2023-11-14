@@ -1,0 +1,54 @@
+.out{
+    display: grid;
+    grid-column: 3;
+    grid-row: 3;
+}
+
+.card {
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    background-color: #FCFFE7;
+    box-shadow: 0px 20px 60px #bebebe,
+                  -20px -20px 60px #ffffff;
+   }
+
+ .content{
+    color: #efcca4;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+   
+.restoname{
+    text-transform: capitalize;
+    color: #CE9461;
+}
+
+nav{
+    background-color: #CE9461;
+    color: #fff;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.btn {
+    color: purple;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid purple;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-weight: bold;
+    background: transparent;
+    position: relative;
+    transition: all 1s;
+    overflow: hidden;
+    align-items: center;
+  }
+  

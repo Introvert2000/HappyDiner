@@ -17,9 +17,9 @@
                 <input type="text" id="name" name="restaurant_name" required>
             </div>
             <?php 
-            session_start()
-            $restaurantName1=$row['restaurant_name'];
-            $_SESSION['restaurant1']=$restaurantName1;
+            // session_start()
+            // $restaurantName1=$row['restaurant_name'];
+            // $_SESSION['restaurant1']=$restaurantName1;
             ?>
             <div class="form-group">
                 <label class="form-label" for="name">Owner Name:</label>

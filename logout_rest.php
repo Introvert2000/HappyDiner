@@ -1,5 +1,5 @@
 <?php
 session_start();
-unset($_SESSION['restaurant1']);
+unset($_SESSION['restaurant_name']);
 header('location:index.php');
 ?>

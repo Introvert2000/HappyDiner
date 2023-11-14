@@ -4,119 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product</title>
-    <link rel="stylesheet" href="font.css">
-    <link rel="stylesheet" href="styles.css">
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
-<style>
-    .custom-button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff; /* Button background color */
-  color: #fff; /* Button text color */
-  border: none; /* Remove default border */
-  border-radius: 5px; /* Add rounded corners */
-  cursor: pointer; /* Change cursor on hover to indicate interactivity */
-  text-align: center; /* Center text horizontally */
-  text-decoration: none; /* Remove underlines for <a> elements */
-}
 
-.custom-button:hover {
-  background-color: #0056b3; /* Change background color on hover */
-}
-
-.custom-button:active {
-  background-color: #00479e; /* Change background color when clicked */
-}
-/* Basic button styles */
-.btn {
-  display: inline-block;
-  padding: 10px 20px; /* Adjust padding as needed */
-  background-color: #007bff; /* Change the background color to your desired color */
-  color: #fff; /* Text color */
-  text-decoration: none; /* Remove underline */
-  border: none; /* Remove border */
-  border-radius: 4px; /* Rounded corners */
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* Hover effect */
-.btn:hover {
-  background-color: #0056b3; /* Change the background color on hover */
-}
-.username{
-
-}
-</style>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="dropdown.css">
+    
 </head>
-
-
-<body>
 <header>
-        <nav>
-            <div class="container">
-                <div class="logo">
-                    <a href="#">Happy Diner</a>
-                </div>
-                <div class="search-bar">
-                    <form method="post" action="display.php"><input type="text" placeholder="Search..." name= "search">
-                </div>
-                <input type="submit" name="submit">
-            </form>
-                <div class="menu">
-                   <?php
-                   session_start();
-                   if(empty($_SESSION['Name1']))
-                   {
-                   
-                   ?>
+    <nav>
+        <div class="container">
+            <div >
+                <img src="Picture\logo.png" alt="" class="logo">
+            </div>
+            <div class="search-bar">
+                <form action='search3.php' method="POST">
+                    <input  type="text" name="query" placeholder="Search products">
+                    <button type="submit" class="search-button">Search</button>
+                </form>
+            </div>
+            <div class="menu">
+                <?php
+                session_start();
+                if (empty($_SESSION['Name1'])) {
+                ?>
                     <ul>
                         <li><a href="login.php">Login</a></li>
                         <li><a href="register.php">Register</a></li>
                     </ul>
-                    <?php }
-                    else{
-                        ?>
-
+                <?php } else { ?>
+                    <div class="dropdown">
                         <ul>
-                        <li id="username"> <a><?php if(!empty($_SESSION['Name1'])){ echo $_SESSION['Name1']; }?></a> </li>
+                            <li id="username"><a>
+                                <?php if (!empty($_SESSION['Name1'])) {
+                                    echo $_SESSION['Name1'];
+                                } ?>
+                            </a></li>
                         </ul>
-                        
-                        <?php
-                    }
-                    ?>
-                </div>
+                        <button class="dropdown-button">&#9660;</button>
+                        <div class="dropdown-content">
+                            <a href="dashboard.php">Dashboard</a>
+                            <a href="logout.php">Logout</a>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
-        </nav>
-    </header>
-<main>
-    
-     <div class="card">
-         <div class="image">
-             <img src="Picture/Order_Food.avif" />
-         </div>
-         <div class="caption">
-                  
-         </div>
-         
-         <!-- <a class="btn btn-primary" href="delivery.php" id="get-location" role="button">Order Food</a> -->
-         <button id= "get-location-order">Order</button>
+        </div>
+    </nav>
+</header>
+<body>
+<div class="bg-image" style="background-image: url('newmain.avif')">
+<div class="space" >
+    <h1>Happy Diner</h1>
+             <!-- <img class="img-des" src="main.jpeg" > -->
+        </div>
+    <main>
 
-     </div>
-     <div class="card">
-         <div class="image">
-             <img src="Picture/Dining.avif" />
-         </div>
-         <div class="caption">
-                  
-         </div>
-         
-         <!-- <a class="btn btn-primary" href="book.php" id="get-location" role="button">Book</a> -->
-         <button id= "get-location-book">Book</button>
-     </div>
-     
-</main>
-<script>
+                <div class="card">
+                <div class="image">
+                    <img src="Picture/Order_Food.avif" />
+                </div>
+                
+                <button class="order-button" id="get-location-order">Order</button>
+            </div>
+            <div class="card">
+                <div class="image">
+                    <img src="Picture/Dining.avif" />
+                </div>
+                <div class="caption">
+                    <!-- Add any relevant content for this card -->
+                </div>
+                <button class="book-button" id="get-location-book">Book</button>
+            </div>
+    </main>
+
+    <script>
     document.getElementById("get-location-book").onclick = function(){
     
     window.location.href = `book.php`
@@ -163,5 +123,26 @@
 </script>
 
 </body>
+<div class="abt" >
+<h3>About us</h3>
+    <p class="tag" >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo, perspiciatis! A assumenda dicta harum quasi dolorem praesentium minus, tempora ipsa quo consequuntur quibusdam nam culpa placeat? Odio obcaecati dolor recusandae!</p>
+</div>
+<footer class="food-footer">
+        <div class="container">
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p>For Reservations and Inquiries:</p>
+                <ul>
+                    <li><a href="tel:+1234567890">Phone: +91 9370568242</a></li>
+                    <li><a href="tel:+9876543210">Phone: +9 (876) 543-210</a></li>
+                </ul>
+            </div>
+            <div class="footer-review">
+                <h3>Customer Reviews</h3>
+                <p>Have you dined with us? Share your experience and read what others have to say.</p>
+                <a class="btn-review" href="add_review.php" >Write a Review</a>
+                <a class="btn-review" href="reviews.php" >View Reviews</a>
+            </div>
+        </div>
+    </footer>
 </html>
-
