@@ -1,6 +1,7 @@
 <?php
 
 require_once 'connection.php';
+session_start();
 
 
 
@@ -32,7 +33,6 @@ require_once 'connection.php';
                 
                 <div class="menu">
                    <?php
-                   session_start();
                    if(empty($_SESSION['Name1']))
                    {
                    
@@ -87,11 +87,11 @@ require_once 'connection.php';
                    <p class="product_name"><?php echo $restaurantName; ?></p>
                 </div>
                 <div class="mainart">
-                <p class="price">$20</p>
-                <div class="revi">
-                <p class="price">3</p>
-                <img class="star" src="star-svgrepo-com.svg" alt="">
-                </div>
+                        <p class="price">$20</p>
+                    <div class="revi">
+                        <p class="price">3</p>
+                        <img class="star" src="star-svgrepo-com.svg" alt="">
+                    </div>  
                 </div>
             <button type="button" id="button_colour" onclick="displaySelectedOption(`<?php echo $restaurantName; ?>`)">Book</button>
             <script>

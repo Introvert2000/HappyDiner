@@ -262,8 +262,8 @@ session_start();
         <div class="section-1">
             <div class="restaurant-det">
             <?php
-    $restaurantName = $_GET['restaurantName'];
-    ?>
+                $restaurantName = $_GET['restaurantName'];
+            ?>
 
         <?php
             $servername = "localhost";

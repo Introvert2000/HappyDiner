@@ -123,6 +123,39 @@ if ($userStmt->execute()) {
         #map {
             height: 400px;
         }
+
+        /* Center the button within the map card */
+            .map-card {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh; /* Adjust the height as needed */
+            }
+
+            /* Style the card containing the button and details */
+            .card {
+                width: 18rem;
+                text-align: center; /* Center the contents within the card */
+            }
+
+            /* Style the button */
+            .btn-primary {
+                margin-top: 20px; /* Add some spacing above the button */
+            }
+
+            /* Style the address details */
+            .address-details {
+                font-size: 14px;
+                color: #333; /* Adjust the color as needed */
+            }
+
+            /* Style the update button */
+            .update-button {
+                display: block; /* Make it a block element to position it below the button */
+                margin-top: 10px; /* Add some spacing between the button and the update button */
+                text-align: center;
+            }
+
     </style>
 </head>
 <body>
@@ -133,9 +166,16 @@ if ($userStmt->execute()) {
             <div class="map-card">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
+
+                    <p class="address-detailzs">123 Main St, City, Country</p>
+
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mapModal">
-                            Open Map Modal
+                            View Map
                         </button>
+                    
+<!-- Update Button -->
+                        <a href="update.php" class="btn btn-secondary update-button">Add New Location</a>
+
                     </div>
                 </div>
             </div>
@@ -189,9 +229,8 @@ if ($userStmt->execute()) {
     </div>
 
             
-
-        <script>
-          const urlParams = new URLSearchParams(window.location.search);
+<script>
+        const urlParams = new URLSearchParams(window.location.search);
         const restaurantName = urlParams.get('restaurantName');
 
         // Set the restaurantName hidden input field
@@ -200,39 +239,48 @@ if ($userStmt->execute()) {
         const storedCartItems = JSON.parse(localStorage.getItem("cartItems"));
         const orderSummaryTable = document.querySelector("table");
         let totalAmount = 0;
+        const quantities = {}; // Initialize an empty object to store item quantities
 
         if (storedCartItems && storedCartItems.length > 0) {
-            // Loop through the storedCartItems and add rows to the table
+            // Loop through the storedCartItems and calculate quantities and update the table
             storedCartItems.forEach(item => {
-                const row = orderSummaryTable.insertRow();
-                const itemNameCell = row.insertCell(0);
-                const quantityCell = row.insertCell(1);
-                const priceCell = row.insertCell(2);
+            if (quantities[item.name]) {
+                quantities[item.name] += item.quantity;
+            } else {
+                quantities[item.name] = item.quantity;
+            }
 
-                itemNameCell.textContent = item.name;
-                quantityCell.textContent = 1; // You can adjust this as needed
-                priceCell.textContent = `$${item.price.toFixed(2)}`;
-                totalAmount += item.price;
-            });
+            // Create a row for the item in the table
+            const row = orderSummaryTable.insertRow();
+            const itemNameCell = row.insertCell(0);
+            const quantityCell = row.insertCell(1);
+            const priceCell = row.insertCell(2);
 
-            // Update the totalAmount input field
-            document.getElementById("totalAmount").value = totalAmount.toFixed(2);
+            itemNameCell.textContent = item.name;
+            quantityCell.textContent = item.quantity; // Use the calculated quantity
+            priceCell.textContent = `$${(item.price * item.quantity).toFixed(2)}`;
 
-            // Display the total amount
-            const totalAmountDisplay = document.getElementById("totalAmountDisplay");
-            totalAmountDisplay.textContent = `$${totalAmount.toFixed(2)}`;
+            totalAmount += item.price * item.quantity;
+        });
 
-            // Set the cartItems input field with the JSON string
-            const cartItemsInput = document.getElementById("cartItems");
-            cartItemsInput.value = JSON.stringify(storedCartItems);
-        } else {
-            // Handle the case where there are no items in the cart
-            alert("Your cart is empty. Please add items to your cart.");
-            // Redirect the user to the restaurant menu page or another appropriate page
-            window.location.href = "restaurant_menu.php";
-        }
+        // Update the totalAmount input field
+        document.getElementById("totalAmount").value = totalAmount.toFixed(2);
+
+        // Display the total amount
+        const totalAmountDisplay = document.getElementById("totalAmountDisplay");
+        totalAmountDisplay.textContent = `$${totalAmount.toFixed(2)}`;
+
+        // Set the cartItems input field with the JSON string
+        const cartItemsInput = document.getElementById("cartItems");
+        cartItemsInput.value = JSON.stringify(quantities); // Store item quantities
+
+    } else {
+        // Handle the case where there are no items in the cart
+        alert("Your cart is empty. Please add items to your cart.");
+        // Redirect the user to the restaurant menu page or another appropriate page
+        window.location.href = "restaurant_menu.php";
+    }
     </script>
-
     </main>
 
 

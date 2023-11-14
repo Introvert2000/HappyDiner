@@ -6,39 +6,36 @@
 <?php
 session_start();
 
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     // Check if the form has been submitted (e.g., from a payment page)
-//     if (isset($_POST['restaurantName'])) {
-//         // Store restaurant name in a session variable
-//         $_SESSION['restaurantName'] = $_POST['restaurantName'];
-//     }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if the form has been submitted (e.g., from a payment page)
+    if (isset($_POST['restaurantName'])) {
+        // Store restaurant name in a session variable
+        $_SESSION['restaurantName'] = $_POST['restaurantName'];
+    }
 
-//     if (isset($_POST['totalAmount'])) {
-//         // Store total amount in a session variable
-//         $_SESSION['totalAmount'] = $_POST['totalAmount'];
-//     }
+    if (isset($_POST['totalAmount'])) {
+        // Store total amount in a session variable
+        $_SESSION['totalAmount'] = $_POST['totalAmount'];
+    }
 
-//     if (isset($_POST['cartItems'])) {
-//         // Store cart items in a session variable
-//         $_SESSION['cartItems'] = json_decode($_POST['cartItems'], true);
-//     }
+    if (isset($_POST['cartItems'])) {
+        // Store cart items in a session variable
+        $_SESSION['cartItems'] = json_decode($_POST['cartItems'], true);
+    }
 
-//     // Redirect to success.php or any other page
+    // Redirect to success.php or any other page
     
-// }
-
-
-
+}
 ?>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
 
 
-<form action="payscript3.php" method="POST">
+<form action="payscript.php" method="POST">
 <script
     src="https://checkout.razorpay.com/v1/checkout.js"
     data-key="<?php echo $apiKey; ?>"
-    data-amount="<?php echo $_SESSION['totalamount'] * 100;?>" 
+    data-amount="<?php echo $_POST['totalAmount'] * 100;?>" 
     data-currency="INR"
     data-id="<?php echo 'OID'.rand(10,100).'END';?>"
     data-buttontext="Pay with Razorpay"

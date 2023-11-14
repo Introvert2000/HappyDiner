@@ -1,8 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
+    <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f5f5f5;
@@ -70,14 +69,12 @@
             background-color: #555;
         }
     </style>
-    </head>
+</head>
 <body>
-    <!-- Header and other content -->
-
     <main>
         <div class="container">
             <h1>Payment Details</h1>
-            
+
             <!-- Order Summary -->
             <h2>Order Summary</h2>
             <table>
@@ -86,22 +83,41 @@
                     <th>Quantity</th>
                     <th>Price</th>
                 </tr>
-                <!-- JavaScript will dynamically add rows here -->
+                <?php
+                // Retrieve and display order items from the cart
+                if (!empty($_SESSION['cart'])) {
+                    foreach ($_SESSION['cart'] as $item) {
+                        echo "<tr>";
+                        echo "<td>" . $item['name'] . "</td>";
+                        echo "<td>" . $item['quantity'] . "</td>";
+                        echo "<td>$" . number_format($item['price'], 2) . "</td>";
+                        echo "</tr>";
+                    }
+                }
+                ?>
             </table>
 
             <!-- Display the total amount -->
-            <p>Total Amount: <span id="totalAmountDisplay">0.00</span></p>
-            
+            <p>Total Amount: <span id="totalAmountDisplay">
+                <?php
+                // Calculate and display the total order amount
+                $totalAmount = 0;
+                if (!empty($_SESSION['cart'])) {
+                    foreach ($_SESSION['cart'] as $item) {
+                        $totalAmount += $item['price'] * $item['quantity'];
+                    }
+                }
+                echo "$" . number_format($totalAmount, 2);
+                ?>
+            </span></p>
+
             <!-- Payment Form and Location Form -->
-            <!-- Your forms here -->
+            <!-- Your payment and location forms go here -->
         </div>
 
-        <form action="payscript2.php" method="post">
-            <input type="hidden" id="totalAmount" name="totalAmount" value="0">
-            <input type="hidden" name="restaurantName" id="restaurantName" value="">
-            <!-- Add a hidden input field for cart items -->
-            <input type="hidden" id="cartItems" name="cartItems" value="">
-            
+        <form action="process_payment.php" method="post">
+            <!-- Add hidden input fields to pass data to the payment processing page -->
+            <input type="hidden" name="totalAmount" value="<?php echo $totalAmount; ?>">
             <button type="submit">Proceed to Payment</button>
         </form>
     </main>
