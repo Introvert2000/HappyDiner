@@ -233,12 +233,11 @@ main .card .caption{
     border-radius: 4px;
     cursor: pointer;
     padding: 10px 20px;
-    font-weight: bold;  
+    font-weight: bold;
 }
 
 .order-button:hover {
     background-color: #218838;
-    margin: 10px;   
 }
 
 /* Style for the "Book" button */
@@ -261,7 +260,7 @@ main .card .caption{
     color: #bb732b;
 }
 .tag{
-    font-size: 2rem;
+    font-size: xx-large;
     color: #100902;  
 }
 
@@ -342,8 +341,4 @@ main .card .caption{
 .btn-review {
     display: inline-block;
     margin: 0 auto;
-}
-
-.logo{
-    height: 100px;
 }

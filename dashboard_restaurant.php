@@ -251,10 +251,19 @@ if ($row = $result->fetch_assoc()) {
 } else {
     $totalRevenue = 0; // Set the total revenue to 0 if no orders found
 }
-$sql = "SELECT COUNT(DISTINCT customer_username) AS customer_username FROM orders";
+// Assuming you already have the restaurant name stored in a variable like $restaurantName
+
+$sql = "SELECT COUNT(DISTINCT customer_username) AS customer_username FROM orders WHERE restaurant_name = ?";
+$stmt = $conn->prepare($sql);
+
+// Bind the parameter
+$stmt->bind_param("s", $restaurantName);
 
 // Execute the SQL query
-$result = $conn->query($sql);
+$stmt->execute();
+
+// Get the result
+$result = $stmt->get_result();
 
 if ($result) {
     // Fetch the result as an associative array
@@ -263,8 +272,14 @@ if ($result) {
     // Get the count of distinct customer usernames
     $distinctCustomersCount = $row['customer_username'];
 
+    // Use $distinctCustomersCount as needed
+} else {
+    echo "Error: " . $stmt->error;
+}
 
-} 
+// Close the statement
+$stmt->close();
+
 
 // Close the database connection
 $conn->close();

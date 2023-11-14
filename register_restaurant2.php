@@ -63,7 +63,6 @@
             <input type="text" name="location" id="search-input" placeholder="Enter a location">
             <input type="hidden" name="latitude" id="latitude" value="">
             <input type="hidden" name="longitude" id="longitude" value="">
-            <button type="submit" name="submit">Submit to Database</button>
             <!-- </form> -->
             <div id="autocomplete-items"></div>
             <div id="latlon">Latitude: N/A, Longitude: N/A</div>

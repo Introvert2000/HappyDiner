@@ -12,8 +12,8 @@
 <header>
     <nav>
         <div class="container">
-            <div class="logo">
-                <a href="#">Happy Diner</a>
+            <div >
+                <img src="Picture\logo.png" alt="" class="logo">
             </div>
             <div class="search-bar">
                 <form action='search3.php' method="POST">
@@ -123,7 +123,7 @@
 
 </script>
 <div class="abt" >
-<h1>About us</h1>
+<h3>About us</h3>
     <p class="tag" >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo, perspiciatis! A assumenda dicta harum quasi dolorem praesentium minus, tempora ipsa quo consequuntur quibusdam nam culpa placeat? Odio obcaecati dolor recusandae!</p>
 </div>
 </body>

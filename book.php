@@ -84,7 +84,7 @@ require_once 'connection.php';
             $_SESSION['restaurant']=$restaurantName;
             ?>
                 <div>
-                   <p class="product_name"><?php echo $restaurantName; ?></p>
+                <p class="product_name"><?php echo $restaurantName; ?></p>
                 </div>
                 <div class="mainart">
                 <p class="price">$20</p>
