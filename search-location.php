@@ -5,76 +5,146 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Result</title>
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="dropdown.css">
-    <link rel="stylesheet" href="./search3.css">
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <style>
-        /* Set the map container's size */
-        #map {
-            height: 400px;
-            width: 100%;
-        }
+      body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
-        /* Add this to your CSS file (search3.css or index.css) */
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+}
 
-        .search-bar {
-            display: flex;
-            align-items: center;
-            margin-top: 20px;
-        }
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .search-bar form {
-            display: flex;
-            align-items: center;
-        }
+.logo a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
 
-        .search-bar input[type="text"] {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-right: 10px;
-            width: 300px;
-            font-size: 16px;
-        }
+.menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
 
-        .search-button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
+.menu ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
 
-        .search-button:hover {
-            background-color: #45a049;
-        }
+.menu a {
+    color: white;
+    text-decoration: none;
+}
 
-        .result-container {
-            display: flex;
-            width: 100%;
-            margin-top: 20px;
-        }
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
 
-        .search-results {
-            flex: 1;
-            padding: 0 20px;
-        }
+.search-bar form {
+    display: flex;
+    align-items: center;
+}
 
-        .map-container {
-            flex: 1;
-            height: 400px; /* Adjust the height as needed */
-            padding: 0 20px;
-        }
-    </style>
+.search-bar input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 300px;
+    font-size: 16px;
+}
+
+.search-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.search-button:hover {
+    background-color: #45a049;
+}
+
+.result-container {
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.search-results {
+    flex: 1;
+    padding: 0 20px;
+}
+
+.map-container {
+    flex: 1;
+    height: 400px;
+    padding: 0 20px;
+}
+
+.card2 {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.image2 img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.caption {
+    margin-top: 10px;
+}
+
+.button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+.user-marker-icon {
+    width: 25px;
+    height: 41px;
+    background-color: #007BFF;
+    border-radius: 5px;
+}
+ 
+    </style> 
 </head>
 
 <body>
@@ -281,4 +351,4 @@ if ("geolocation" in navigator) {
     </main>
 </body>
 
-</html>
+    </html>
