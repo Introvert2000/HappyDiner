@@ -1,14 +1,14 @@
 <?php
-
+session_start();
 require_once 'connection.php';
 $city = $_GET['city'];
 
-if(empty($_SESSION['city'])){
+if(empty($_SESSION['citylocation'])){
     $select_query = mysqli_query($connection,"SELECT * FROM restaurant WHERE city = '{$city}' ");
     
 }
 else{
-    $select_query = mysqli_query($connection,"SELECT * FROM restaurant ");
+    $select_query = mysqli_query($connection, "SELECT * FROM restaurant WHERE city = '{$_SESSION['citylocation']}' ");
 }
 
 ?>
@@ -37,7 +37,7 @@ else{
 }
 
 .custom-button:hover {
-  background-color: #0056b3; /* Change background color on hover *x/
+  background-color: #0056b3; /* Change background color on hover */
 }
 
 .custom-button:active {
@@ -57,7 +57,7 @@ else{
                 </div>                
                 <div class="menu">
                    <?php
-                   session_start();
+                   
                    if(empty($_SESSION['Name1']))
                    {
                    
@@ -86,7 +86,7 @@ else{
         while($row = mysqli_fetch_assoc($select_query)){
 
     ?>
-     <!-- <div class="card">
+     <div class="card">
             <div class="image">
              
              <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" />
@@ -116,44 +116,12 @@ else{
                     window.location.href = `delivery_product.php?restaurantName=${restaurantName}`;
                 }
             </script>
-        </div>    
-    </div> -->
-<div class="dcard">    
+        </div>
+         
 
-  <div class="image">
-             
-             <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" />
+        </form>
 
-        
-            </div>
-            <div class="dcaption">
-           
-                <?php 
-                $restaurantName=$row['restaurant_name'];
-                $_SESSION['restaurant']=$restaurantName;
-                ?>
-
-            <div>
-                <p class="product_name"><?php echo $restaurantName; ?></p>
-                </div>
-                <div class="mainart">
-                <div class="minc">
-                <p class="price">$20</p>
-                <div class="revi">
-                <p class="price">3</p>
-                <img class="star" src="star-svgrepo-com.svg" alt="">
-                </div>
-                </div>
-                </div>
-            <button type="button" id="button_colour" onclick="displaySelectedOption(`<?php echo $restaurantName; ?>`)">Order</button>
-            <script>
-                function displaySelectedOption(restaurantName) {
-                    window.location.href = `delivery_product.php?restaurantName=${restaurantName}`;
-                }
-            </script>
-        </div>    
-    </div>
-</div>
+     </div>
      <?php
 }
      ?>
@@ -161,4 +129,3 @@ else{
 
 </body>
 </html>
-

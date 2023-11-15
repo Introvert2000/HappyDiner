@@ -71,8 +71,12 @@ $select_query = mysqli_query($connection, "SELECT * FROM `$restaurantName`");
             <div>
                 <h3><?php echo $row["food_item"]; ?></h3>
                 <p><?php echo $row["price"]; ?></p>
-                <button class="order-button" data-name="<?php echo $row["food_item"]; ?>" data-price="<?php echo $row["price"]; ?>">Order</button>
-            </div>
+                <div class="quantity-container">
+                    <button class="add-to-cart" data-name="<?php echo $row["food_item"]; ?>" data-price="<?php echo $row["price"]; ?>">+</button>
+                    <span class="quantity"></span>
+                    <button class="remove-from-cart" data-name="<?php echo $row["food_item"]; ?>">-</button>
+                </div>           
+             </div>
         </div>
     <?php
     }
@@ -96,111 +100,155 @@ $select_query = mysqli_query($connection, "SELECT * FROM `$restaurantName`");
                 <!-- Order summary will be displayed here dynamically -->
         </div>
         <p>Are you sure you want to proceed with your order?</p>
-        <button id="confirmOrderButton">Confirm Order</button>
+        <button id="submitOrderButton">Submit Order</button>
     </div>
 </div>
 
+<!-- Add this code to your HTML just before the closing </body> tag -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    const cartItems = [];
-    let total = 0;
-    const proceedToCheckoutButton = document.getElementById("proceed-to-checkout");
-        proceedToCheckoutButton.addEventListener("click", function () {
-            // Check if the user is logged in
-            const isUserLoggedIn = <?php echo empty($_SESSION['Name1']) ? 'false' : 'true'; ?>;
-            
-            if (isUserLoggedIn) {
-                // Redirect to the payment.php page if logged in
-                proceedToCheckoutButton.addEventListener("click", openOrderConfirmationModal);
+  // Cart-related functions
+  const cartItems = [];
+  let total = 0;
 
-        // Get the order confirmation modal and buttons
-        const orderConfirmationModal = document.getElementById("orderConfirmationModal");
-        const closeOrderModalButton = document.getElementById("closeOrderModal");
-        const confirmOrderButton = document.getElementById("confirmOrderButton");
+  const addButtons = document.querySelectorAll(".add-to-cart");
+  const removeButtons = document.querySelectorAll(".remove-from-cart");
 
-        function openOrderConfirmationModal() {
-            orderConfirmationModal.style.display = "block";
-        }
+  addButtons.forEach(button => {
+    button.addEventListener("click", addToCart);
+  });
 
-        closeOrderModalButton.addEventListener("click", closeOrderConfirmationModal);
-        confirmOrderButton.addEventListener("click", proceedToCheckout);
+  removeButtons.forEach(button => {
+    button.addEventListener("click", removeFromCart);
+  });
 
-        function closeOrderConfirmationModal() {
-            orderConfirmationModal.style.display = "none";
-        }
+  function addToCart(event) {
+    const itemName = event.target.getAttribute("data-name");
+    const itemPrice = parseFloat(event.target.getAttribute("data-price"));
 
-        function proceedToCheckout() {
-            // Redirect to the payment.php page
-            const restaurantName = "<?php echo $restaurantName; ?>";
-        window.location.href = `payment2.php?restaurantName=${restaurantName}`;
-        }
+    const cartItem = cartItems.find(item => item.name === itemName);
 
-        function openOrderConfirmationModal() {
-            // Clear previous order summary
-            document.getElementById("orderSummary").innerHTML = "";
+    if (cartItem) {
+      cartItem.quantity += 1;
+    } else {
+      cartItems.push({ name: itemName, price: itemPrice, quantity: 1 });
+    }
 
-            // Populate order summary
-            cartItems.forEach(item => {
-                const orderSummaryItem = document.createElement("div");
-                orderSummaryItem.textContent = `${item.name} - $${item.price}`;
-                document.getElementById("orderSummary").appendChild(orderSummaryItem);
-            });
+    total += itemPrice;
+    updateCartDisplay();
 
-            orderConfirmationModal.style.display = "block";
-        }
-            } else {
-                // Display an alert if the user is not logged in
-                alert("Please log in before proceeding to checkout.");
-            }
-        });
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    updateQuantityDisplay(itemName);
+    updateTotalAmountDisplay();
+  }
 
-    // JavaScript code for cart functionality
+  function removeFromCart(event) {
+    const itemName = event.target.getAttribute("data-name");
+    const cartItem = cartItems.find(item => item.name === itemName);
 
-    // Add event listeners to all "Order" buttons
-    const orderButtons = document.querySelectorAll(".order-button");
-    orderButtons.forEach(button => {
-        button.addEventListener("click", addToCart);
+    if (cartItem) {
+      if (cartItem.quantity > 1) {
+        cartItem.quantity -= 1;
+      } else {
+        const index = cartItems.indexOf(cartItem);
+        cartItems.splice(index, 1);
+      }
+
+      total -= cartItem.price;
+      updateCartDisplay();
+
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      updateQuantityDisplay(itemName);
+      updateTotalAmountDisplay();
+    }
+  }
+
+  function updateCartDisplay() {
+    const cartList = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+
+    cartList.innerHTML = "";
+    cartItems.forEach(item => {
+      const listItem = document.createElement("li");
+      listItem.textContent = `${item.name} x${item.quantity} - $${item.price * item.quantity}`;
+      cartList.appendChild(listItem);
     });
 
-    // Add event listener for "Proceed to Checkout" button
-    // const proceedToCheckoutButton = document.getElementById("proceed-to-checkout");
-    
+    cartTotal.textContent = total.toFixed(2);
+    cartTotalOutsideModal.textContent = total.toFixed(2);
+  }
 
-    function addToCart(event) {
-        const itemName = event.target.getAttribute("data-name");
-        const itemPrice = parseFloat(event.target.getAttribute("data-price"));
+  function updateTotalAmountDisplay() {
+    cartTotalInsideModal.textContent = total.toFixed(2);
+    cartTotalOutsideModal.textContent = total.toFixed(2);
+  }
 
-        cartItems.push({ name: itemName, price: itemPrice });
-        total += itemPrice;
+  function updateQuantityDisplay(itemName) {
+    const quantitySpan = document.querySelector(`.menu-item[data-name="${itemName}"] .quantity`);
+    const cartItem = cartItems.find(item => item.name === itemName);
 
-        // Update the cart display
-        updateCartDisplay();
+    quantitySpan.textContent = cartItem ? cartItem.quantity : "0";
+  }
 
-        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  // Modal-related functions
+  const proceedToCheckoutButton = document.getElementById("proceed-to-checkout");
+  const cartTotalInsideModal = document.getElementById("cart-total-inside-modal");
+  const cartTotalOutsideModal = document.getElementById("cart-total-outside-modal");
+  const submitOrderButton = document.getElementById("submitOrderButton");
 
+  proceedToCheckoutButton.addEventListener("click", openOrderConfirmationModal);
+  submitOrderButton.addEventListener("click", submitOrder);
+
+  function openOrderConfirmationModal() {
+    document.getElementById("orderSummary").innerHTML = "";
+
+    cartItems.forEach(item => {
+      const orderSummaryItem = document.createElement("div");
+      orderSummaryItem.textContent = `${item.name} x${item.quantity} - $${item.price * item.quantity}`;
+      document.getElementById("orderSummary").appendChild(orderSummaryItem);
+    });
+
+    orderConfirmationModal.style.display = "block";
+  }
+
+  function closeOrderConfirmationModal() {
+    orderConfirmationModal.style.display = "none";
+  }
+
+  function submitOrder() {
+    if (cartItems.length > 0) {
+      const restaurantName = "<?php echo $restaurantName; ?>";
+      const cartQuantity = cartItems.map(item => ({ name: item.name, quantity: item.quantity, price:item.price }));
+      
+      window.location.href = `payment5.php?restaurantName=${restaurantName}&cartItems=${JSON.stringify(cartQuantity)}`;
+    } else {
+      alert("Your cart is empty. Please add items to your cart before proceeding.");
     }
+    closeOrderConfirmationModal();
+  }
 
-    function updateCartDisplay() {
-        const cartList = document.getElementById("cart-items");
-        const cartTotal = document.getElementById("cart-total");
-
-        // Clear existing cart items
-        cartList.innerHTML = "";
-
-        // Add updated cart items
-        cartItems.forEach(item => {
-            const listItem = document.createElement("li");
-            listItem.textContent = `${item.name} - $${item.price}`;
-            cartList.appendChild(listItem);
-        });
-
-        // Update the total
-        cartTotal.textContent = total.toFixed(2); // Display total with two decimal places
-    }
-
-    
-
-        
+//   function submitOrder() {
+//     if (cartItems.length > 0) {
+//       const restaurantName = "<?php echo $restaurantName; ?>";
+//       const cartQuantity = cartItems.map(item => ({ name: item.name, quantity: item.quantity, price: item.price }));
+//       // Set session variables before redirecting
+//       <?php
+//       $_SESSION['restaurantName'] = $restaurantName;
+//       $_SESSION['cartQuantity'] = json_encode($cartQuantity);
+//       $_SESSION['totalAmount'] = $total;
+//       ?>
+//       window.location.href = "payment5.php"; // Redirect to the payment page
+//     } else {
+//       alert("Your cart is empty. Please add items to your cart before proceeding.");
+//     }
+//   }
 </script>
+
+
+
+
+
 
 <style>
     /* Modal styles */
