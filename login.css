@@ -81,7 +81,7 @@ body {
     text-decoration: underline;
 }
 
-.btn-review {
+form .btn {
     background-color: #bb732b;
     color: #fff;
     border: none;

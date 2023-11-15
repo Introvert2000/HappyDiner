@@ -37,7 +37,7 @@
 <body>
     <h1>Add Location</h1>
     <div class="registration-form">
-        <form method="post" action="process_location.php" enctype="multipart/form-data">
+        <form method="post" action="process_location2.php" enctype="multipart/form-data">
             
 
             

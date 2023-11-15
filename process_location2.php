@@ -36,7 +36,7 @@ if ($checkStmt->execute()) {
         if ($updateStmt->execute()) {
             echo '<script>';
             echo 'alert("Data inserted into the database successfully");';
-            echo 'window.location.href = "index.php";';
+            echo 'window.location.href = "dashboard.php";';
             echo '</script>';
                 } else {
             echo "Error: " . $updateSql . "<br>" . $conn->error;
@@ -50,7 +50,7 @@ if ($checkStmt->execute()) {
         if ($insertStmt->execute()) {
             echo '<script>';
             echo 'alert("Data inserted into the database successfully");';
-            echo 'window.location.href = "index.php";';
+            echo 'window.location.href = "dashboard.php";';
             echo '</script>';
         } else {
             // Display an alert if there was an issue with the execution

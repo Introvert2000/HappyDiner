@@ -190,10 +190,11 @@
             <input type="hidden" name="restaurantName" value="<?php echo $restaurantName; ?>">
         
             <p>Table reservation</p>
-                    <div>
-                        <label for="reservationDate">Select Date: </label>
-                        <input type="date" id="reservationDate" name= "date" min="<?php echo date('Y-m-d'); ?>">
-                    </div>
+            <div>
+    <label for="reservationDate">Select Date: </label>
+    <input type="date" id="reservationDate" name="date" min="<?php echo date('Y-m-d'); ?>">
+</div>
+
 
                     <div>
                         <label for="guestCount">Number of Guests: </label>
@@ -229,10 +230,9 @@
                     </div> -->
                     <div class="time-selection-container">
                         <div class="time-buttons">
-                            <button id="customTimeButton" type="button" onclick="showCustomTimeInput()">Select
-                                Time</button>
+                            <button id="customTimeButton" type="button" onclick="showCustomTimeInput()">Select Time</button>
                         </div>
-                        <input type="time" name="time" id="customTimeInput" style="display: none;">
+                        <input type="time" name="time" id="customTimeInput" style="display: none;" min="<?php echo date('H:i'); ?>">
                     </div>
 
                     <script>
@@ -243,18 +243,47 @@
                     </script>
 
 <div>
-                    <button id="bookButton" type="button" onclick="bookTable()">Book</button>
+                    <button class="bookButton" id="bookButton" type="button" onclick="bookTable()">Book</button>
 </div>
+<br>
+
+<div>
+    <button type="button" class="bookButton" onclick="displaySelectedOptionBook(`<?php echo $restaurantName; ?>`)">View Review</button>
+</div>
+
+<script>
+    function displaySelectedOptionBook(restaurantName) {
+        window.location.href = `review2.php?restaurant=${restaurantName}`;
+    }
+</script>
+
                         <script>
          function bookTable() {
-        // Check if the user is logged in (you can use a variable like 'loggedIn' to track this)
-        // If the user is not logged in, display an alert
+        // Check if the user is logged in
         <?php if (empty($_SESSION['Name1'])) : ?>
             alert("Please log in to make a reservation.");
         <?php else : ?>
-            // If the user is logged in, you can perform other actions or submit the form.
-            // For example, you can submit the form using JavaScript.
-            // Replace 'reservationForm' with the ID of your form.
+            // Get selected date and time
+            const selectedDate = document.getElementById("reservationDate").value;
+            const selectedTime = document.getElementById("customTimeInput").value;
+
+            // Get the current date and time
+            const currentDate = new Date().toISOString().split('T')[0];
+            const currentTime = new Date().toLocaleTimeString('en-US', { hour12: false });
+
+            // Check if the selected date is valid
+            if (selectedDate < currentDate) {
+                alert("Please select a future date.");
+                return;
+            }
+
+            // Check if the selected time is valid
+            if (selectedDate === currentDate && selectedTime < currentTime) {
+                alert("Please select a future time.");
+                return;
+            }
+
+            // Submit the form
             document.getElementById('reservationForm').submit();
         <?php endif; ?>
     }

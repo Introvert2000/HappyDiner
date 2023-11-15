@@ -90,7 +90,7 @@ html{
 main{
     max-width: 600px;
     max-height: fit-content;
-    margin:     ;
+    /* margin:     ; */
     display: flex ;
     column-span: all;
     justify-content: space-between;

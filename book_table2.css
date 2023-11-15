@@ -170,3 +170,16 @@ body {
 .costi{
     align-self: flex-end;
 }
+
+.bookButton {
+    background-color: #bb732b;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    margin-right: 10px;
+    text-decoration: none;
+}

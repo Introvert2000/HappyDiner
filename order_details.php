@@ -3,7 +3,7 @@
 function getOrderItems($orderID, $conn) {
     $orderItems = array();
 
-    $sql = "SELECT item_name, item_price FROM order_items WHERE order_id = ?";
+    $sql = "SELECT item_name, item_price ,quantity FROM order_items WHERE order_id = ?";
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
@@ -211,7 +211,7 @@ body {
                 <tr>
                     <td><?php echo $orderID; ?></td>
                     <td><?php echo $customerName; ?></td>
-                    <td>$<?php echo number_format($totalAmount, 2); ?></td>
+                    <td>₹<?php echo number_format($totalAmount, 2); ?></td>
                     <td><?php echo $restaurant; ?></td>
                 </tr>
             </table>
@@ -223,13 +223,16 @@ body {
                 <tr>
                     <th>Item</th>
                     <th>Price</th>
+                    <th>Quantity</th>
                 </tr>
                 <!-- Retrieve and display order items here -->
                 <?php
                 foreach ($orderItems as $orderItem) {
                     echo "<tr>";
                     echo "<td>" . $orderItem['item_name'] . "</td>";
-                    echo "<td>$" . number_format($orderItem['item_price'], 2) . "</td>";
+                    echo "<td>₹" . number_format($orderItem['item_price'], 2) . "</td>";
+                    echo "<td>" . $orderItem['quantity'] . "</td>";
+
                     echo "</tr>";
                 }
                 ?>
@@ -242,6 +245,11 @@ body {
             </span>
             <button id="toggleLocation">Show Location</button>
         </div>
+                    <div>
+                    <button class="back-button" onclick="window.location.href='dashboard.php'">Back to Dashboard</button>
+                    </div>
+       
+
     </main>
 
     <!-- Footer and other content -->

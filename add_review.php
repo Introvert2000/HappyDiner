@@ -33,40 +33,55 @@
 
     <?php
     // Check if the form is submitted
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Database connection details
-        $server = "localhost";
-        $username = "root";
-        $password = "";
-        $database = "login";
+  
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Database connection details
+    $server = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "login";
 
-        // Create a database connection
-        $conn = new mysqli('localhost','root','','login');
+    // Create a database connection
+    $conn = new mysqli($server, $username, $password, $database);
 
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-        // Retrieve data from the form
-        $restaurantName = $_POST['restaurant_name'];
-        $reviewerName = $_POST['customer_name'];
-        $rating = $_POST['stars'];
-        $reviewText = $_POST['review_discription'];
-        $giveDate  = $_POST['date'];
+    // Retrieve data from the form
+    $restaurantName = $_POST['restaurant_name'];
+    $reviewerName = $_POST['customer_name'];
+    $rating = $_POST['stars'];
+    $reviewText = $_POST['review_discription'];
+    $giveDate = $_POST['date'];
+
+    // Check if the restaurant is present and has an approved status
+    $checkRestaurantQuery = "SELECT * FROM restaurant WHERE restaurant_name = '$restaurantName' AND status = 'Approved'";
+    $result = $conn->query($checkRestaurantQuery);
+
+    if ($result->num_rows > 0) {
+        // Restaurant is present and approved, proceed with the review insertion
 
         // Insert the review into the database
-        $sql = "INSERT INTO restaurant_reviews (restaurant_name, customer_username, stars, review_description, date1) VALUES ('$restaurantName', '$reviewerName', '$rating', '$reviewText',' $giveDate ')";
+        $sql = "INSERT INTO restaurant_reviews (restaurant_name, customer_username, stars, review_description, date1) VALUES ('$restaurantName', '$reviewerName', '$rating', '$reviewText', '$giveDate')";
 
         if ($conn->query($sql) === TRUE) {
-            echo "Review added successfully!";
+            // Success: Display JavaScript alert and redirect
+            echo '<script>alert("Review added successfully!"); window.location.replace("reviews.php");</script>';
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            // Error: Display JavaScript alert and redirect
+            echo '<script>alert("Error: ' . $sql . '\n' . $conn->error . '"); window.location.replace("add_review.php");</script>';
         }
-
-        // Close the database connection
-        $conn->close();
+    } else {
+        // Restaurant not found or not approved: Display JavaScript alert and redirect
+        echo '<script>alert("Error: The restaurant either does not exist or is not approved."); window.location.replace("add_review.php");</script>';
     }
-    ?>
+
+    // Close the database connection
+    $conn->close();
+}
+?>
+
 </body>
 </html>

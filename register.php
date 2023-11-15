@@ -97,7 +97,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
   
   $stmt = $conn->prepare("SELECT * FROM reg WHERE Username = ? OR email = ? OR MobileNo = ?");
 
-    $stmt->bind_param("sss", $Username, $Email, $Phone);
+    $stmt->bind_param("sss", $Username, $email, $MobileNo);
     $stmt->execute();
     $stmt_result = $stmt->get_result();
 

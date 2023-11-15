@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+
+<?php
+session_start();
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,31 +10,84 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="dropdown.css">
+
+    <style>
+        .logo a {
+    text-decoration: none;
+    color: #bb732b;
+    font-size: 24px;
+    font-weight: bold;
+}
+.logo{
+    height: 100px;
+}
+
+.search-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+/* Hover effect for the search button */
+.search-button:hover {
+    background-color: #0056b3;
+}
+    </style>
 </head>
 
 <header>
-    <nav>
-        <div class="container">
-            <div class="logo">
-                <a href="index.php">Happy Diner</a>
+        <nav>
+            <div class="container">
+            <div >
+                <img src="Picture\logo.png" alt="" class="logo">
             </div>
-
-
-            <div class="menu">
-
-
-                <?php
-                session_start(); {
-                    ?>
+            <div class="search-bar">
+                <form action='search3.php' method="POST">
+                    <input  type="text" name="query" placeholder="Search products">
+                    <button type="submit" class="search-button">Search</button>
+                </form>
+            </div>            
+                <div class="menu">
+                   <?php
+                   
+                   if(empty($_SESSION['Name1']))
+                   {
+                   
+                   ?>
                     <ul>
-
+                        <li><a href="login.php">Login</a></li>
+                        <li><a href="register.php">Register</a></li>
                     </ul>
-                    <?php
-                }
-                ?>
+                    <?php }
+                    else {?>
+                    <div class="dropdown">
+                        <ul>
+                            <li id="username"><a>
+                                <?php if (!empty($_SESSION['Name1'])) {
+                                    echo $_SESSION['Name1'];
+                                } ?>
+                            </a></li>
+                        </ul>
+                        <button class="dropdown-button">&#9660;</button>
+                        <div class="dropdown-content">
+                            <a href="dashboard.php">Dashboard</a>
+                            <a href="update.php">Location</a>
+                            <a href="logout.php">Logout</a>
+
+
+
+                        </div>
+                    </div>
+                <?php }
+                    ?>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 </header>
 
 <body>
@@ -158,21 +214,21 @@
                             $orderItemsStmt = $conn->prepare($orderItemsSql);
                             $orderItemsStmt->bind_param("i", $orderData['order_id']);
 
-                            if ($orderItemsStmt->execute()) {
-                                $orderItemsResult = $orderItemsStmt->get_result();
+                            // if ($orderItemsStmt->execute()) {
+                            //     $orderItemsResult = $orderItemsStmt->get_result();
 
-                                if ($orderItemsResult->num_rows === 0) {
-                                    echo "No items found for this order.";
-                                } else {
-                                    echo "<ul>";
-                                    while ($itemData = $orderItemsResult->fetch_assoc()) {
-                                        echo "<li>Product: " . $itemData['item_name'] . ", Price: " . $itemData['item_price'] . "</li>";
-                                    }
-                                    echo "</ul>";
-                                }
-                            } else {
-                                echo "Error fetching order items: " . $conn->error;
-                            }
+                            //     if ($orderItemsResult->num_rows === 0) {
+                            //         echo "No items found for this order.";
+                            //     } else {
+                            //         echo "<ul>";
+                            //         while ($itemData = $orderItemsResult->fetch_assoc()) {
+                            //             echo "<li>Product: " . $itemData['item_name'] . ", Price: " . $itemData['item_price'] . "</li>";
+                            //         }
+                            //         echo "</ul>";
+                            //     }
+                            // } else {
+                            //     echo "Error fetching order items: " . $conn->error;
+                            // }
                         }
                     }
                 } else {

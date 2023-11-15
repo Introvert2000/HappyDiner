@@ -103,10 +103,12 @@
                                 <!-- <p class="product_name". ><?php echo $row["restaurant_name"]; ?></p>  -->
 
                                 <!-- <input type="submit" id="Submit" name="Submit" value="Book" class="btn btn-success" /> -->
-                                <button type="button" class="button"
+                               <div class="">
+                               <button type="button" class="button"
                                     onclick="displaySelectedOptionOrder(`<?php echo $restaurantName; ?>`)">Order</button>
                                 <button type="button" class="button"
                                     onclick="displaySelectedOptionBook(`<?php echo $restaurantName; ?>`)">Book</button>
+                               </div>
 
 
 

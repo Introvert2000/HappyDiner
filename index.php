@@ -13,7 +13,7 @@
     <nav>
         <div class="container">
             <div >
-                <img src="Picture\logo.png" alt="" class="logo">
+            <a href="index.php"> <img src="Picture\logo.png" alt="" class="logo"></a>
             </div>
             <div class="search-bar">
                 <form action='search3.php' method="POST">
@@ -42,7 +42,55 @@
                         <button class="dropdown-button">&#9660;</button>
                         <div class="dropdown-content">
                             <a href="dashboard.php">Dashboard</a>
+                            <?php
+                                                                                    if (isset($_SESSION['Name1']) && !empty($_SESSION['Name1'])) {
+                                                                                        $dbHost = "localhost";
+                                                                                        $dbUser = "root";
+                                                                                        $dbPassword = "";
+                                                                                        $dbName = "login";
+
+                                                                                        // Create a database connection
+                                                                                        $conn = new mysqli($dbHost, $dbUser, $dbPassword, $dbName);
+
+                                                                                        $userId = $_SESSION['Name1']; // Assuming UserID is the user ID column in your users table
+                                                                                        $query = "SELECT location ,District FROM reg WHERE Name1 = ?";
+                                                                                        $stmt = $conn->prepare($query);
+                                                                                        $stmt->bind_param("s", $userId);
+                                                                                        $stmt->execute();
+                                                                                        $stmt->bind_result($userLocation , $district);
+                                                                                        $stmt->fetch();
+                                                                                        $stmt->close();
+
+                                                                                        $_SESSION['citylocation'] = $district ;
+                                                                                        ?>
+                                                                                        <div class="nav-links" id="locationLink">
+                                                                                            <?php if (!empty($userLocation)) { ?>
+                                                                                                <a href='search-location.php'><?php echo $userLocation; ?></a>
+                                                                                            <?php } else { ?>
+                                                                                                <a href='addlocation.php'>Add Location</a>
+                                                                                            <?php } ?>
+                                                                                        </div>
+
+                                                                                        <script>
+                                                                                            // Assuming you have jQuery included in your project
+                                                                                            $(document).ready(function () {
+                                                                                                // You can use AJAX to dynamically update the link without refreshing the page
+                                                                                                $.ajax({
+                                                                                                    url: 'update_location_link.php', // Create a PHP file to handle the update
+                                                                                                    type: 'POST',
+                                                                                                    success: function (data) {
+                                                                                                        $('#locationLink').html(data); // Update the link based on the response from the server
+                                                                                                    }
+                                                                                                });
+                                                                                            });
+                                                                                        </script>
+                                                                                    <?php
+                                                                                    }
+                            ?>
                             <a href="logout.php">Logout</a>
+
+
+
                         </div>
                     </div>
                 <?php } ?>

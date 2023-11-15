@@ -65,7 +65,7 @@
             <input type="hidden" name="longitude" id="longitude" value="">
             <!-- </form> -->
             <div id="autocomplete-items"></div>
-            <div id="latlon">Latitude: N/A, Longitude: N/A</div>
+            <div id="latlon"></div>
             <script src="location.js"></script>
 
             <button class="submit-button" type="submit">Register</button>

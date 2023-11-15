@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once 'connection.php';
 
 
@@ -17,8 +17,39 @@ require_once 'connection.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product</title>
     <link rel="stylesheet" href="book.css">
-   
-    
+    <link rel="stylesheet" href="dropdown.css">
+
+    <style>
+        header {
+
+background-color: #333;
+color: #fff;
+}
+        .logo a {
+    text-decoration: none;
+    color: #bb732b;
+    font-size: 24px;
+    font-weight: bold;
+}
+.logo{
+    height: 100px;
+}
+
+.search-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+/* Hover effect for the search button */
+.search-button:hover {
+    background-color: #0056b3;
+}
+    </style>
 </head>
 
 
@@ -26,13 +57,18 @@ require_once 'connection.php';
 <header>
         <nav>
             <div class="container">
-                <div class="logo">
-                    <a href="index.php">Happy Diner</a>
-                </div>
-                
+            <div >
+            <a href="index.php"> <img src="Picture\logo.png" alt="" class="logo"></a>
+            </div>
+            <div class="search-bar">
+                <form action='search3.php' method="POST">
+                    <input  type="text" name="query" placeholder="Search products">
+                    <button type="submit" class="search-button">Search</button>
+                </form>
+            </div>            
                 <div class="menu">
                    <?php
-                   session_start();
+                   
                    if(empty($_SESSION['Name1']))
                    {
                    
@@ -42,8 +78,8 @@ require_once 'connection.php';
                         <li><a href="register.php">Register</a></li>
                     </ul>
                     <?php }
-                    else{
-                        ?>
+
+                    else { ?>
                     <div class="dropdown">
                         <ul>
                             <li id="username"><a>
@@ -56,10 +92,12 @@ require_once 'connection.php';
                         <div class="dropdown-content">
                             <a href="dashboard.php">Dashboard</a>
                             <a href="logout.php">Logout</a>
+
+
+
                         </div>
                     </div>
-                        <?php
-                    }
+                <?php }
                     ?>
                 </div>
             </div>
@@ -80,16 +118,17 @@ require_once 'connection.php';
          <div class="caption">
             <?php 
             $restaurantName=$row['restaurant_name'];
-            
+            $rating = $row['restauant_rating'];
+                $price = $row['recommen_price'];
             $_SESSION['restaurant']=$restaurantName;
             ?>
                 <div>
                 <p class="product_name"><?php echo $restaurantName; ?></p>
                 </div>
                 <div class="mainart">
-                <p class="price">$20</p>
+                <p class="price">₹<?php echo $price; ?></p>
                 <div class="revi">
-                <p class="price">3</p>
+                <p class="price"><?php echo $rating?></p>
                 <img class="star" src="star-svgrepo-com.svg" alt="">
                 </div>
                 </div>

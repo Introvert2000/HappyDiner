@@ -257,7 +257,6 @@ button.back-button:hover {
                     // Execute the prepared statement to update the status
                     if ($stmt->execute()) {
                         // Status updated successfully
-                        header('Location: draggable.php'); // Redirect to your admin dashboard
                     } else {
                         // Check for SQL errors
                         echo "Error executing SQL statement: " . $stmt->error;
